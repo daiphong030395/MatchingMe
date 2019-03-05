@@ -1,8 +1,8 @@
 import React from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBModalFooter, MDBIcon, MDBCardHeader, MDBBtn
 } from "mdbreact";
-import {NavLink} from 'react-router-dom';
-import Profile from "./Profile";
+import {NavLink, Redirect} from 'react-router-dom';
+// import Profile from "./Profile";
 
 class FormLogin extends React.Component{
   constructor(props) {
@@ -48,6 +48,7 @@ class FormLogin extends React.Component{
           msg: 'Hello ' + data.name
         });
         console.log("state.msg: ",this.state.msg);
+        
       // this.props.onLogin(true);
       } else{
         this.setState({
@@ -72,7 +73,12 @@ class FormLogin extends React.Component{
       if(this.state.msg === false){
         return(<p>Sai mật khẩu hoặc tên đăng nhập.</p>);
       } else{
-        return(<Profile></Profile>)
+        return(<Redirect 
+          to={{
+            pathname: "/profile",
+            search: "?usn=" + this.state.username
+          }}
+        />)
       }
     } 
     else {  
