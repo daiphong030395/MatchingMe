@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nttduong.matchingme.model.Province;
 import com.nttduong.matchingme.model.User;
 import com.nttduong.matchingme.service.UserService;
 
@@ -21,6 +22,7 @@ public class CRUDRestController {
 
 	@Autowired
 	private UserService userService;
+//	private ProvinceService provinceService;
 
 	// setter
 	public void setUserService(UserService u) {
@@ -145,6 +147,23 @@ public class CRUDRestController {
 				System.out.println("False");
 				return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
 			}
-			
+		}
+		
+		//GET PROVINCE NAME
+		@RequestMapping(value="/getProvince", method = RequestMethod.POST)
+		public ResponseEntity<Province> getProvince(@RequestBody Province prv){
+			Province p = new Province();
+//			Province p = userService.findProvinceById(prv.getMatp());
+//			Province p = provinceService.getProvinceName(prv.getMatp());
+			System.out.println("Controller_Province_id: " + prv.getMatp());
+//			System.out.println("Controller_Province_name" + p.getName());
+//			if(p != null) {
+//				System.out.println("True");
+//				System.out.println(p);
+				return new ResponseEntity<Province>(p, HttpStatus.OK);
+//			} else {
+//				System.out.println("False");
+//				return new ResponseEntity<Province>(HttpStatus.NO_CONTENT);
+//			}
 		}
 }

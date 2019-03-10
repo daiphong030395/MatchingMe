@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.nttduong.matchingme.model.Province;
 import com.nttduong.matchingme.model.User;
 
 //@Repository(value = "userDAO")
@@ -185,6 +186,27 @@ public class UserDaoImpl implements UserDao {
 		}
 		session.close();
 	}
+	
+	//TEST
+	@Override
+	public Province findProvinceById(int id) {
+		Session session = sessionFactory.openSession(); // can't open ????
+		Transaction transaction = session.beginTransaction();
+		Province p = new Province();
+		try {
+			p = (Province) session.createQuery("From com.nttduong.matchingme.model.Province P WHERE P.matp = " + id)
+					.getSingleResult();
+			System.out.println("ProvinceDAO_FindProvinceById: " + p.getName());
+//		System.out.println("TEST");
+			transaction.commit();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			transaction.rollback();
+		}
+		session.close();
+		return p;
+	}
+	
 }
 
 //c2

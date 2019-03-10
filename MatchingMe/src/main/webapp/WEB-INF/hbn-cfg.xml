@@ -27,6 +27,7 @@
 			<list>
 				<value>com.nttduong.matchingme.model.User</value>
 				<value>com.nttduong.matchingme.model.Right</value>
+				<value>com.nttduong.matchingme.model.Province</value>
 			</list>
 		</property>
 	</bean>
@@ -47,6 +48,20 @@
 			<ref bean = "userDao" />
 		</property>
 	</bean> 
+	
+	<bean id="provinceDao" class="com.nttduong.matchingme.dao.ProvinceDao">
+		<property name="sessionFactory" >
+			<ref bean = "sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="provinceService" class="com.nttduong.matchingme.service.ProvinceService">
+		<property name="provinceDao">
+			<ref bean = "provinceDao" />
+		</property>
+	</bean> 
+	
+	
 	
 	
 	
