@@ -25,11 +25,11 @@ class FormLogin extends React.Component{
   
   getAPI(){
     fetch('http://localhost:8080//MatchingMe/login',{
-      method: "POST",
       mode: "cors",
+      method: "POST",
       headers:{ 
         // 'Access-Control-Allow-Origin':'',
-        'Accept': 'application/json',
+        // 'Accept': 'application/json',
         "Content-Type": "application/json"
       },
       body: JSON.stringify({"username": this.state.username, "password": this.state.password})
@@ -62,8 +62,8 @@ class FormLogin extends React.Component{
   }
 
   onSubmitLogin = (event) => {
-    console.log('onSubmitLogin');
     event.preventDefault();
+    console.log('onSubmitLogin');
     console.log(JSON.stringify({"Username": this.state.username, "Password": this.state.password}));
     this.getAPI();
     

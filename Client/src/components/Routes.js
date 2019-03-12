@@ -15,9 +15,10 @@ class Routes extends React.Component {
         <Route path='/' exact component={Main} />
         <Route path='/signup' component={FormSignup} />
         <Route path='/login' component = {FormLogin} />
-        <Route path='/profile' component={Profile} />
+        <Route path='/profile' exact component={Profile} />
         <Route path='/table' component={Table} />
         <Route path='/404' component={NotFoundPage} />
+
       </Switch>
     );
   }
