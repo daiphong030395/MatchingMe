@@ -21,12 +21,4 @@ public class ProvinceService {
 		return provinceDao.findProvinceById(id);
 	}
 	
-	public static void main(String[] args) {
-		Province p = new Province();
-		ProvinceService ps = new ProvinceService();
-		p = ps.getProvinceName(01);
-		System.out.println(p.getName());
-		
-	}
-	
 }

@@ -11,6 +11,7 @@
 		<intercept-url pattern="/" access="permitAll()" />
 		<intercept-url pattern="/login" access="permitAll()" />
 		<intercept-url pattern="/logout" access="permitAll()" />
+		<intercept-url pattern="/getProvince/**" access="permitAll()" />
 
 		<intercept-url pattern="/admin/**"
 			access="hasRole('ROLE_ADMIN')" />			

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nttduong.matchingme.model.Province;
 import com.nttduong.matchingme.model.User;
+//import com.nttduong.matchingme.service.ProvinceService;
 import com.nttduong.matchingme.service.UserService;
 
 @RestController // combination of @Controller and @ResponseBody annotations
@@ -150,20 +151,30 @@ public class CRUDRestController {
 		}
 		
 		//GET PROVINCE NAME
-		@RequestMapping(value="/getProvince", method = RequestMethod.POST)
+		@RequestMapping(value="/getProvince", method = RequestMethod.POST) 
 		public ResponseEntity<Province> getProvince(@RequestBody Province prv){
+			int id = prv.getMatp();
 			Province p = new Province();
-//			Province p = userService.findProvinceById(prv.getMatp());
-//			Province p = provinceService.getProvinceName(prv.getMatp());
-			System.out.println("Controller_Province_id: " + prv.getMatp());
-//			System.out.println("Controller_Province_name" + p.getName());
-//			if(p != null) {
-//				System.out.println("True");
-//				System.out.println(p);
-				return new ResponseEntity<Province>(p, HttpStatus.OK);
-//			} else {
-//				System.out.println("False");
-//				return new ResponseEntity<Province>(HttpStatus.NO_CONTENT);
-//			}
+			p = userService.findProvinceById(id); //--> OK
+			System.out.println("Controller_Province_id: " + p.getMatp());
+			return new ResponseEntity<Province>(p, HttpStatus.OK);
 		}
+			//Not working
+//		@RequestMapping(value="/getProvince", method = RequestMethod.POST) 
+//		public ResponseEntity<Province> getProvince(@RequestBody Province prv){
+//			int id = prv.getMatp();
+//			Province p = new Province();
+//			p = provinceService.getProvinceName(id); //--> DISABLE???
+//			System.out.println("Controller_Province_id: " + p.getMatp());
+//			return new ResponseEntity<Province>(p, HttpStatus.OK);
+//		}
+			//GET ok
+//		@RequestMapping(value="/getProvince/{id}", method = RequestMethod.GET) //GET ok
+//		public ResponseEntity<Province> getProvince(@PathVariable("id") int id){
+//			Province p = new Province();
+//			p = userService.findProvinceById(id); //--> OK
+//			System.out.println("Controller_Province_id: " + p.getMatp());
+//			return new ResponseEntity<Province>(p, HttpStatus.OK);
+//		}
+		
 }

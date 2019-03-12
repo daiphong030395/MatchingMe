@@ -13,9 +13,9 @@ public class ProvinceDao {
 	private SessionFactory sessionFactory;
 	
 	// setter for sessionFactory
-		public void setSessionFactory(SessionFactory sessionFactory) {
-			this.sessionFactory = sessionFactory;
-		}
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 	
 	public Province findProvinceById(int id) {
 		Session session = sessionFactory.openSession();
@@ -24,7 +24,7 @@ public class ProvinceDao {
 		try {
 			p = (Province) session.createQuery("From com.nttduong.matchingme.model.Province P WHERE P.matp = " + id)
 					.getSingleResult();
-			System.out.println("ProvinceDAO_FindProvinceById: " + p.getName());
+			System.out.println("ProvinceDAO_getProvinceById: " + p.getName());
 			transaction.commit();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -32,12 +32,6 @@ public class ProvinceDao {
 		}
 		session.close();
 		return p;
-	}
-	public static void main(String[] args) {
-		Province p = new Province();
-		ProvinceDao pd = new ProvinceDao();
-		p = pd.findProvinceById(01);
-		System.out.println(p.getName());
 	}
 	
 }

@@ -190,13 +190,13 @@ public class UserDaoImpl implements UserDao {
 	//TEST
 	@Override
 	public Province findProvinceById(int id) {
-		Session session = sessionFactory.openSession(); // can't open ????
+		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		Province p = new Province();
 		try {
 			p = (Province) session.createQuery("From com.nttduong.matchingme.model.Province P WHERE P.matp = " + id)
 					.getSingleResult();
-			System.out.println("ProvinceDAO_FindProvinceById: " + p.getName());
+			System.out.println("UserDAO_FindProvinceById: " + p.getName());
 //		System.out.println("TEST");
 			transaction.commit();
 		} catch (Exception e) {
