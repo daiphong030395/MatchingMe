@@ -151,7 +151,7 @@ public class CRUDRestController {
 		}
 		
 		//GET PROVINCE NAME
-		@RequestMapping(value="/getProvince", method = RequestMethod.POST) 
+		@RequestMapping(value="/province", method = RequestMethod.POST) 
 		public ResponseEntity<Province> getProvince(@RequestBody Province prv){
 			int id = prv.getMatp();
 			Province p = new Province();
