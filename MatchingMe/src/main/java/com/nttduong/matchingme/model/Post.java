@@ -8,14 +8,14 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "post", catalog = "matching_me", uniqueConstraints = @UniqueConstraint(columnNames = "idUser"))
+@Table(name = "post", catalog = "matching_me", uniqueConstraints = @UniqueConstraint(columnNames = "Id_Post"))
 public class Post {
 	
 	@Id
 	@GeneratedValue
-	@Column
+	@Column(name="Id_post")
 	private int idPost;
-	@Column
+	@Column(name="Id_user")
 	private int idUser;
 	@Column
 	private String matp;
@@ -23,11 +23,11 @@ public class Post {
 	private String maqh;
 	@Column
 	private String xaid;
-	@Column
+	@Column(name="Id_degree")
 	private int idDegree;
-	@Column
+	@Column(name="Id_class")
 	private int idClass;
-	@Column
+	@Column(name="Id_subject")
 	private int idSubject;
 	@Column
 	private int money;

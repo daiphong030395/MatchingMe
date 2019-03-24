@@ -10,7 +10,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
 		<property name="url" value="jdbc:mysql://localhost:3306/matching_me?createDatabaseIfNotExist=false&amp;autoReconnect=true&amp;useSSL=false"></property>
 		<property name="username" value="root"></property>
-		<property name="password" value="12345"></property>
+		<property name="password" value=""></property>
 	</bean>
 	
 	<bean id="sessionFactory"
@@ -37,38 +37,41 @@
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	
+	<!-- Connect database USER  -->
 	<bean id="userDao" class="com.nttduong.matchingme.dao.UserDaoImpl">
 		<property name="sessionFactory" >
 			<ref bean = "sessionFactory" />
 		</property>
 	</bean>
-	
 	<bean id="userService" class="com.nttduong.matchingme.service.UserServiceImpl">
 		<property name="userDao">
 			<ref bean = "userDao" />
 		</property>
 	</bean> 
 	
+	<!-- Connect database PROVINCE  -->
 	<bean id="provinceDao" class="com.nttduong.matchingme.dao.ProvinceDao">
 		<property name="sessionFactory" >
 			<ref bean = "sessionFactory" />
 		</property>
 	</bean>
-	
 	<bean id="provinceService" class="com.nttduong.matchingme.service.ProvinceService">
 		<property name="provinceDao">
 			<ref bean = "provinceDao" />
 		</property>
 	</bean> 
-	<bean id="postService" class="com.nttduong.matchingme.service.PostService">
+	
+	<!-- Connect database POST  -->
+	<bean id="postDao" class="com.nttduong.matchingme.dao.PostDaoImpl">
+		<property name="sessionFactory" >
+			<ref bean = "sessionFactory" />
+		</property>
+	</bean>
+	<bean id="postService" class="com.nttduong.matchingme.service.PostServiceImpl">
 		<property name="postDao">
 			<ref bean = "postDao" />
 		</property>
 	</bean>
-	
-	
-	
 	
 	
 </beans>
