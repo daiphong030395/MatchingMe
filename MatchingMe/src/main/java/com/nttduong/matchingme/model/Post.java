@@ -1,17 +1,35 @@
 package com.nttduong.matchingme.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
-
+@Entity
+@Table(name = "post", catalog = "matching_me", uniqueConstraints = @UniqueConstraint(columnNames = "idUser"))
 public class Post {
 	
+	@Id
+	@GeneratedValue
+	@Column
 	private int idPost;
+	@Column
 	private int idUser;
+	@Column
 	private String matp;
+	@Column
 	private String maqh;
+	@Column
 	private String xaid;
+	@Column
 	private int idDegree;
+	@Column
 	private int idClass;
+	@Column
 	private int idSubject;
+	@Column
 	private int money;
 	
 	public int getIdPost() {

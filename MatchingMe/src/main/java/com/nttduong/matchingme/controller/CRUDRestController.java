@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nttduong.matchingme.model.Post;
 import com.nttduong.matchingme.model.Province;
 import com.nttduong.matchingme.model.User;
+import com.nttduong.matchingme.service.PostService;
 //import com.nttduong.matchingme.service.ProvinceService;
 import com.nttduong.matchingme.service.UserService;
 
@@ -23,6 +25,9 @@ public class CRUDRestController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private PostService postService;
 //	private ProvinceService provinceService;
 
 	// setter
@@ -42,14 +47,14 @@ public class CRUDRestController {
 	}
 
 	// Get All users
-		@RequestMapping(value = "/users", method = RequestMethod.GET)
-		public ResponseEntity<List<User>> listAllusers() {
-			List<User> list = userService.findAll();
-			if (list.isEmpty()) {
-				return new ResponseEntity<List<User>>(HttpStatus.NO_CONTENT);
-			}
-			return new ResponseEntity<List<User>>(list, HttpStatus.OK);
+	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	public ResponseEntity<List<User>> listAllusers() {
+		List<User> list = userService.findAll();
+		if (list.isEmpty()) {
+			return new ResponseEntity<List<User>>(HttpStatus.NO_CONTENT);
 		}
+		return new ResponseEntity<List<User>>(list, HttpStatus.OK);
+	}
 		
 	// Add user
 		@RequestMapping(value="/user/new", method = RequestMethod.POST)
@@ -176,5 +181,13 @@ public class CRUDRestController {
 //			System.out.println("Controller_Province_id: " + p.getMatp());
 //			return new ResponseEntity<Province>(p, HttpStatus.OK);
 //		}
-		
+		// Get All users
+		@RequestMapping(value = "/posts", method = RequestMethod.GET)
+		public ResponseEntity<List<Post>> listAllPost() {
+			List<Post> arrPost = postService.getAllPost();
+			if (arrPost.isEmpty()) {
+				return new ResponseEntity<List<Post>>(HttpStatus.NO_CONTENT);
+			}
+			return new ResponseEntity<List<Post>>(arrPost, HttpStatus.OK);
+		}
 }

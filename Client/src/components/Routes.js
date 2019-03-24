@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import FormSignup from  './Pages/SignUp';
 import FormLogin from './Pages/Login';
 import Profile from './Pages/Profile';
-import Main from './Main';
+import Main from './Pages/Main';
 import Table from './Pages/details/Table';
 import NotFoundPage from './Pages/NotFoundPage';
 

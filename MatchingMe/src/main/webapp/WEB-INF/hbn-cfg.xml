@@ -10,7 +10,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
 		<property name="url" value="jdbc:mysql://localhost:3306/matching_me?createDatabaseIfNotExist=false&amp;autoReconnect=true&amp;useSSL=false"></property>
 		<property name="username" value="root"></property>
-		<property name="password" value=""></property>
+		<property name="password" value="12345"></property>
 	</bean>
 	
 	<bean id="sessionFactory"
@@ -26,6 +26,7 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>com.nttduong.matchingme.model.User</value>
+				<value>com.nttduong.matchingme.model.Post</value>
 				<value>com.nttduong.matchingme.model.Right</value>
 				<value>com.nttduong.matchingme.model.Province</value>
 			</list>
@@ -60,6 +61,11 @@
 			<ref bean = "provinceDao" />
 		</property>
 	</bean> 
+	<bean id="postService" class="com.nttduong.matchingme.service.PostService">
+		<property name="postDao">
+			<ref bean = "postDao" />
+		</property>
+	</bean>
 	
 	
 	
