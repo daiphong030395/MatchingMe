@@ -2,6 +2,7 @@ package com.nttduong.matchingme.dao;
 
 import java.util.List;
 
+import com.nttduong.matchingme.model.Province;
 import com.nttduong.matchingme.model.User;
 
 public interface UserDao {
@@ -22,8 +23,10 @@ public interface UserDao {
 	public List<User> findAll();
 	
 	public boolean isExit(User user);
-
-
+	
+	//TEST
+	public Province findProvinceById(int id);
+	
 }
 
 

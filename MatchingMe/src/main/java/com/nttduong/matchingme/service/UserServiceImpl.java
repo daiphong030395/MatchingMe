@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.nttduong.matchingme.dao.UserDao;
+import com.nttduong.matchingme.model.Province;
 import com.nttduong.matchingme.model.User;
 
 @Service
@@ -29,6 +30,7 @@ public class UserServiceImpl implements UserService,UserDetailsService {
 
 	@Override
 	public User findById(int id) {
+//		System.out.println("SERVICE_findById_id: " +id);
 		System.out.println("SERVICE_findById_NAME: " + userDao.findById(id).getName());
 		return userDao.findById(id);
 	}
@@ -113,6 +115,13 @@ public class UserServiceImpl implements UserService,UserDetailsService {
 						accountNonLocked, Arrays.asList(authority));
 		System.out.println(userDetail.getAuthorities());
 		return userDetail;
+	}
+
+	//TEST
+	@Override
+	public Province findProvinceById(int id) {
+		// TODO Auto-generated method stub
+		return userDao.findProvinceById(id);
 	}
 
 }

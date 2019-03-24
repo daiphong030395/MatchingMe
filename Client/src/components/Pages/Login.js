@@ -1,8 +1,8 @@
 import React from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBModalFooter, MDBIcon, MDBCardHeader, MDBBtn
 } from "mdbreact";
-import {NavLink} from 'react-router-dom';
-import Profile from "./Profile";
+import {NavLink, Redirect} from 'react-router-dom';
+// import Profile from "./Profile";
 
 class FormLogin extends React.Component{
   constructor(props) {
@@ -25,10 +25,14 @@ class FormLogin extends React.Component{
   
   getAPI(){
     fetch('http://localhost:8080//MatchingMe/login',{
+      // mode: "cors",
       method: "POST",
-      mode: "cors",
       headers:{ 
-        // 'Access-Control-Allow-Origin':'',
+        // "Chrome Extension Allow-Control-Allow-Origin": '*',
+        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+        "Access-Control-Allow-Origin": "http://localhost:3000/profile",
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+        "Allow-Credentials": true,
         'Accept': 'application/json',
         "Content-Type": "application/json"
       },
@@ -48,6 +52,7 @@ class FormLogin extends React.Component{
           msg: 'Hello ' + data.name
         });
         console.log("state.msg: ",this.state.msg);
+        
       // this.props.onLogin(true);
       } else{
         this.setState({
@@ -61,8 +66,8 @@ class FormLogin extends React.Component{
   }
 
   onSubmitLogin = (event) => {
-    console.log('onSubmitLogin');
     event.preventDefault();
+    console.log('onSubmitLogin');
     console.log(JSON.stringify({"Username": this.state.username, "Password": this.state.password}));
     this.getAPI();
     
@@ -72,7 +77,12 @@ class FormLogin extends React.Component{
       if(this.state.msg === false){
         return(<p>Sai mật khẩu hoặc tên đăng nhập.</p>);
       } else{
-        return(<Profile></Profile>)
+        return(<Redirect 
+          to={{
+            pathname: "/profile",
+            search: "?usn=" + this.state.username
+          }}
+        />)
       }
     } 
     else {  

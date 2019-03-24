@@ -2,6 +2,7 @@ package com.nttduong.matchingme.service;
 
 import java.util.List;
 
+import com.nttduong.matchingme.model.Province;
 import com.nttduong.matchingme.model.User;
 
 public interface UserService {
@@ -23,6 +24,9 @@ public interface UserService {
 	public List<User> findAll();
 	
 	public boolean isExit(User user);
+	
+	//TEST
+	public Province findProvinceById(int id);
 
 
 }
