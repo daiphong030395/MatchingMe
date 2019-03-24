@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 03, 2019 lúc 05:35 PM
+-- Thời gian đã tạo: Th3 24, 2019 lúc 12:41 PM
 -- Phiên bản máy phục vụ: 10.1.33-MariaDB
 -- Phiên bản PHP: 7.2.6
 
@@ -12071,23 +12071,25 @@ INSERT INTO `devvn_xaphuongthitran` (`xaid`, `name`, `type`, `maqh`) VALUES
 --
 
 CREATE TABLE `post` (
-  `Id_post` int(5) NOT NULL,
-  `Username` varchar(20) COLLATE utf8_vietnamese_ci NOT NULL,
-  `matp` varchar(5) COLLATE utf8_vietnamese_ci NOT NULL,
-  `maqh` varchar(5) COLLATE utf8_vietnamese_ci NOT NULL,
-  `xaid` varchar(5) COLLATE utf8_vietnamese_ci NOT NULL,
-  `Id_degree` int(5) NOT NULL,
-  `Id_class` int(5) NOT NULL,
-  `Id_subject` int(5) NOT NULL,
-  `Money` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
+  `Id` int(20) NOT NULL,
+  `Id_User` varchar(20) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci NOT NULL,
+  `Id_Town` varchar(5) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL,
+  `Id_District` varchar(5) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL,
+  `Id_Province` varchar(5) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL,
+  `Id_Class` int(5) DEFAULT NULL,
+  `Id_Degree` int(5) DEFAULT NULL,
+  `Id_Subject` int(5) DEFAULT NULL,
+  `Money` float DEFAULT NULL,
+  `Description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `post`
 --
 
-INSERT INTO `post` (`Id_post`, `Username`, `matp`, `maqh`, `xaid`, `Id_degree`, `Id_class`, `Id_subject`, `Money`) VALUES
-(1, 'Hermine', '01', '001', '00010', 1, 2, 1, 2000);
+INSERT INTO `post` (`Id`, `Id_User`, `Id_Town`, `Id_District`, `Id_Province`, `Id_Class`, `Id_Degree`, `Id_Subject`, `Money`, `Description`) VALUES
+(1, '4', '00001', '001', '01', 3, 1, 1, 1000000, 'Description Test'),
+(2, '2', '00004', '002', '02', 2, 2, 2, 2000000, 'Description Test 2');
 
 -- --------------------------------------------------------
 
@@ -12142,12 +12144,12 @@ CREATE TABLE `user` (
   `Username` varchar(20) COLLATE utf8_vietnamese_ci NOT NULL,
   `Password` varchar(20) COLLATE utf8_vietnamese_ci NOT NULL,
   `Name` text COLLATE utf8_vietnamese_ci NOT NULL,
-  `Birthday` date NOT NULL,
+  `Birthday` date DEFAULT NULL,
   `Email` text COLLATE utf8_vietnamese_ci,
   `Facebook` text COLLATE utf8_vietnamese_ci,
   `Phone` int(12) DEFAULT NULL,
   `Id_card` int(12) DEFAULT NULL,
-  `Gender` enum('Female','Male') COLLATE utf8_vietnamese_ci NOT NULL,
+  `Gender` enum('Female','Male') COLLATE utf8_vietnamese_ci DEFAULT NULL,
   `Id_right` int(5) NOT NULL,
   `Id_degree` int(5) DEFAULT NULL,
   `Id_province` varchar(5) COLLATE utf8_vietnamese_ci DEFAULT NULL,
@@ -12162,11 +12164,11 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`Id`, `Username`, `Password`, `Name`, `Birthday`, `Email`, `Facebook`, `Phone`, `Id_card`, `Gender`, `Id_right`, `Id_degree`, `Id_province`, `Id_district`, `Id_town`, `Money_amount`) VALUES
 ('1', 'Admin', '123', 'Huệ', '1997-07-24', 'minhhuephucat@gmail.', 'jfdhdf', 1678873076, 13246587, 'Female', 1, 2, '15', '021', '00022', 100000),
-('4', 'giasu', '123', 'Nguyễn Thị Cám', '1999-03-03', 'camcongchua@yahoo.com', 'https://www.facebook.com/Cam123', 123456789, 123456789, 'Male', 2, 1, '01', '001', '00001', 0),
 ('13', 'giasu123', '123', 'Nguyễn Thị Cám', '1999-03-03', 'camcongchua@yahoo.com', 'https://www.facebook.com/Cam123', 123456789, 123456789, 'Male', 3, 1, '1', '1', '1', 0),
+('14', 'Luli', '123', 'Nguyen Thi Thuy Duong', '1997-07-24', 'thuyduong@gmail.com', 'abcdef', 1678873076, 13246587, 'Female', 2, 2, '15', '21', '22', 100000),
 ('2', 'Hermine', '123456', 'Hermione Granger', '1978-06-28', 'hermijean@gmail.com', 'Hermione Nguyen', 212534, 1234235, 'Female', 2, 2, '22', '1', '7', 0),
 ('3', 'Hermione', '123456', 'Hermione Granger', '2018-06-04', 'hean@gmail.com', 'Hermione Nguyen', 212534, 1234235, 'Female', 3, 2, '22', '1', '7', 0),
-('14', 'Luli', '123', 'Duong', '1997-07-24', 'thuyduong@gmail.com', 'jfdhdf', 1678873076, 13246587, 'Female', 2, 2, '15', '21', '22', 100000);
+('4', 'giasu', '123', 'Nguyễn Thị Cám', '1999-03-03', 'camcongchua@yahoo.com', 'https://www.facebook.com/Cam123', 123456789, 123456789, 'Male', 2, 1, '01', '001', '00001', 0);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -12208,14 +12210,14 @@ ALTER TABLE `devvn_xaphuongthitran`
 -- Chỉ mục cho bảng `post`
 --
 ALTER TABLE `post`
-  ADD PRIMARY KEY (`Id_post`,`Username`),
-  ADD KEY `matp` (`matp`),
-  ADD KEY `maqh` (`maqh`),
-  ADD KEY `xaid` (`xaid`),
-  ADD KEY `Id_degree` (`Id_degree`),
-  ADD KEY `Id_class` (`Id_class`),
-  ADD KEY `Id_subject` (`Id_subject`),
-  ADD KEY `Username` (`Username`);
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `Id_Class` (`Id_Class`),
+  ADD KEY `Id_Degree` (`Id_Degree`),
+  ADD KEY `Id_District` (`Id_District`),
+  ADD KEY `Id_Province` (`Id_Province`),
+  ADD KEY `Id_Subject` (`Id_Subject`),
+  ADD KEY `Id_Town` (`Id_Town`),
+  ADD KEY `Id_User` (`Id_User`);
 
 --
 -- Chỉ mục cho bảng `right`
@@ -12233,7 +12235,10 @@ ALTER TABLE `subject`
 -- Chỉ mục cho bảng `user`
 --
 ALTER TABLE `user`
-  ADD UNIQUE KEY `UKsb8bbouer5wak8vyiiy4pf2bx` (`Username`);
+  ADD PRIMARY KEY (`Id`),
+  ADD UNIQUE KEY `Username` (`Username`),
+  ADD KEY `user_ibfk_1` (`Id_degree`),
+  ADD KEY `user_ibfk_2` (`Id_right`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
@@ -12255,7 +12260,7 @@ ALTER TABLE `degree`
 -- AUTO_INCREMENT cho bảng `post`
 --
 ALTER TABLE `post`
-  MODIFY `Id_post` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `right`
@@ -12289,13 +12294,26 @@ ALTER TABLE `devvn_xaphuongthitran`
 -- Các ràng buộc cho bảng `post`
 --
 ALTER TABLE `post`
-  ADD CONSTRAINT `post_ibfk_1` FOREIGN KEY (`matp`) REFERENCES `devvn_tinhthanhpho` (`matp`),
-  ADD CONSTRAINT `post_ibfk_2` FOREIGN KEY (`maqh`) REFERENCES `devvn_quanhuyen` (`maqh`),
-  ADD CONSTRAINT `post_ibfk_3` FOREIGN KEY (`xaid`) REFERENCES `devvn_xaphuongthitran` (`xaid`),
-  ADD CONSTRAINT `post_ibfk_5` FOREIGN KEY (`Id_degree`) REFERENCES `degree` (`Id_degree`),
-  ADD CONSTRAINT `post_ibfk_6` FOREIGN KEY (`Id_class`) REFERENCES `class` (`Id_class`),
-  ADD CONSTRAINT `post_ibfk_7` FOREIGN KEY (`Id_subject`) REFERENCES `subject` (`Id_subject`),
-  ADD CONSTRAINT `post_ibfk_8` FOREIGN KEY (`Username`) REFERENCES `user` (`Username`);
+  ADD CONSTRAINT `post_ibfk_1` FOREIGN KEY (`Id_Class`) REFERENCES `class` (`Id_class`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `post_ibfk_2` FOREIGN KEY (`Id_Degree`) REFERENCES `degree` (`Id_degree`),
+  ADD CONSTRAINT `post_ibfk_3` FOREIGN KEY (`Id_District`) REFERENCES `devvn_quanhuyen` (`maqh`),
+  ADD CONSTRAINT `post_ibfk_4` FOREIGN KEY (`Id_Province`) REFERENCES `devvn_tinhthanhpho` (`matp`),
+  ADD CONSTRAINT `post_ibfk_5` FOREIGN KEY (`Id_Subject`) REFERENCES `subject` (`Id_subject`),
+  ADD CONSTRAINT `post_ibfk_6` FOREIGN KEY (`Id_Town`) REFERENCES `devvn_xaphuongthitran` (`xaid`),
+  ADD CONSTRAINT `post_ibfk_7` FOREIGN KEY (`Id_User`) REFERENCES `user` (`Id`);
+
+--
+-- Các ràng buộc cho bảng `right`
+--
+ALTER TABLE `right`
+  ADD CONSTRAINT `right_ibfk_1` FOREIGN KEY (`Id_right`) REFERENCES `user` (`Id_right`);
+
+--
+-- Các ràng buộc cho bảng `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`Id_degree`) REFERENCES `degree` (`Id_degree`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `user_ibfk_2` FOREIGN KEY (`Id_right`) REFERENCES `right` (`Id_right`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService,UserDetailsService {
 	}
 
 	@Override
-	public User findById(int id) {
+	public User findById(String id) {
 //		System.out.println("SERVICE_findById_id: " +id);
 		System.out.println("SERVICE_findById_NAME: " + userDao.findById(id).getName());
 		return userDao.findById(id);
@@ -54,7 +54,6 @@ public class UserServiceImpl implements UserService,UserDetailsService {
 	@Override
 	public void deleteById(int id) {
 		userDao.deleteById(id);
-
 	}
 
 	public void deleteByUsername(String id) {

@@ -26,7 +26,7 @@ public class PostDaoImpl implements PostDao {
 		Transaction transaction = session.beginTransaction();
 		Post p = new Post();
 		try {
-			p = (Post) session.createQuery("From com.nttduong.matchingme.model.Post P WHERE P.idPost = " + id)
+			p = (Post) session.createQuery("From com.nttduong.matchingme.model.Post P WHERE P.Id = " + id)
 					.getSingleResult();
 			System.out.println("ProvinceDAO_getPostById: " + p.getIdClass());
 			transaction.commit();

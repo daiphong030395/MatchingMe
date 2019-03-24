@@ -8,59 +8,70 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "post", catalog = "matching_me", uniqueConstraints = @UniqueConstraint(columnNames = "Id_Post"))
+@Table(name = "post", catalog = "matching_me", uniqueConstraints = @UniqueConstraint(columnNames = "Id"))
 public class Post {
 	
 	@Id
 	@GeneratedValue
-	@Column(name="Id_post")
-	private int idPost;
-	@Column(name="Id_user")
-	private int idUser;
 	@Column
-	private String matp;
-	@Column
-	private String maqh;
-	@Column
-	private String xaid;
-	@Column(name="Id_degree")
+	private int id;
+	
+	@Column(name="Id_User")
+	private String idUser;
+	
+	@Column(name="Id_Town")
+	private String idTown;
+	
+	@Column(name="Id_District")
+	private String idDistrict;
+
+	@Column(name="Id_Province")
+	private String idProvince;
+	
+	@Column(name="Id_Degree")
 	private int idDegree;
-	@Column(name="Id_class")
+	
+	@Column(name="Id_Class")
 	private int idClass;
-	@Column(name="Id_subject")
+	
+	@Column(name="Id_Subject")
 	private int idSubject;
+	
 	@Column
 	private int money;
 	
-	public int getIdPost() {
-		return idPost;
+	@Column(name="Description")
+	private String description;
+	
+	public int getId() {
+		return id;
 	}
-	public void setIdPost(int idPost) {
-		this.idPost = idPost;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public int getIdUser() {
+	public String getIdUser() {
 		return idUser;
 	}
-	public void setIdUser(int idUser) {
+	public void setIdUser(String idUser) {
 		this.idUser = idUser;
 	}
-	public String getMatp() {
-		return matp;
+	public String getIdTown() {
+		return idTown;
 	}
-	public void setMatp(String matp) {
-		this.matp = matp;
+	public void setIdTown(String idTown) {
+		this.idTown = idTown;
 	}
-	public String getMaqh() {
-		return maqh;
+	public String getIdDistrict() {
+		return idDistrict;
 	}
-	public void setMaqh(String maqh) {
-		this.maqh = maqh;
+	public void setIdDistrict(String idDistrict) {
+		this.idDistrict = idDistrict;
 	}
-	public String getXaid() {
-		return xaid;
+	public String getIdProvince() {
+		return idProvince;
 	}
-	public void setXaid(String xaid) {
-		this.xaid = xaid;
+	public void setIdProvince(String idProvince) {
+		this.idProvince = idProvince;
 	}
 	public int getIdDegree() {
 		return idDegree;
@@ -85,26 +96,16 @@ public class Post {
 	}
 	public void setMoney(int money) {
 		this.money = money;
+	}	
+	public String getDescription() {
+		return description;
 	}
-	
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	
 	public Post() {
 		super();
 	}
-	
-	public Post(int idPost, int idUser, String matp, String maqh, String xaid, int idDegree, int idClass, int idSubject,
-			int money) {
-		super();
-		this.idPost = idPost;
-		this.idUser = idUser;
-		this.matp = matp;
-		this.maqh = maqh;
-		this.xaid = xaid;
-		this.idDegree = idDegree;
-		this.idClass = idClass;
-		this.idSubject = idSubject;
-		this.money = money;
-	}
-	
 	
 }

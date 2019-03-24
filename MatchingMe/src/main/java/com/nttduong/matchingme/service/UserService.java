@@ -7,7 +7,7 @@ import com.nttduong.matchingme.model.User;
 
 public interface UserService {
 
-	public User findById(int id);
+	public User findById(String id);
 
 	public User findByUsername(String username);
 	

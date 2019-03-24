@@ -23,7 +23,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public User findById(int id) {
+	public User findById(String id) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		User u = new User();

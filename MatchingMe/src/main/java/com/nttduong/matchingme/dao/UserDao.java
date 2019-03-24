@@ -6,7 +6,7 @@ import com.nttduong.matchingme.model.Province;
 import com.nttduong.matchingme.model.User;
 
 public interface UserDao {
-	public User findById(int id);
+	public User findById(String id);
 
 	public User findByUsername(String username);
 	

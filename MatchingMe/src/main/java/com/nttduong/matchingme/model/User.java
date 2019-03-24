@@ -23,7 +23,7 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue
 	@Column
-	private int id;
+	private String id;
 	
 	@Column
 	private String username;
@@ -100,11 +100,11 @@ public class User implements Serializable {
 		this.name = name;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -232,7 +232,7 @@ public class User implements Serializable {
 		this.idRight = idRight;
 	}
 
-	public User(int idUser, String username, String password, int idRight) {
+	public User(String idUser, String username, String password, int idRight) {
 		super();
 		this.id = idUser;
 		this.username = username;

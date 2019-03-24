@@ -37,7 +37,7 @@ public class CRUDRestController {
 
 	// Get Single user
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> getUser(@PathVariable("id") int i) {
+	public ResponseEntity<User> getUser(@PathVariable("id") String i) {
 		User u = userService.findById(i);
 		if (u.getUsername() == null) {
 			return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
@@ -100,7 +100,7 @@ public class CRUDRestController {
 		
 		// Update User
 		@RequestMapping(value="/user/{id}", method = RequestMethod.PUT)
-		public ResponseEntity<User> update(@PathVariable("id") int id, @RequestBody User user){
+		public ResponseEntity<User> update(@PathVariable("id") String id, @RequestBody User user){
 			User u = userService.findById(id);
 			if(u == null) {
 				return new ResponseEntity<User>(HttpStatus.NOT_FOUND);

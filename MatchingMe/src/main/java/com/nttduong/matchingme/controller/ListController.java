@@ -116,7 +116,7 @@ public class ListController {
 
 	//Link to Form Edit user for user
 	@RequestMapping("/user/update/{id}")
-	public ModelAndView update(@PathVariable("id") int id) {
+	public ModelAndView update(@PathVariable("id") String id) {
 		ModelAndView modelAndView = new ModelAndView("Test");
 		
 		User user = userService.findById(id);
@@ -127,7 +127,7 @@ public class ListController {
 	}
 	//Link to Form Edit user for admin
 	@RequestMapping("/admin/update/{id}")
-	public ModelAndView updateAd(@PathVariable("id") int id) {
+	public ModelAndView updateAd(@PathVariable("id") String id) {
 		ModelAndView modelAndView = new ModelAndView("FormEdit");
 		
 		User user = userService.findById(id);
@@ -149,7 +149,7 @@ public class ListController {
 		@RequestMapping(value = "/admin/update", method = RequestMethod.POST)
 		public String doUpdate(HttpServletRequest req, HttpServletResponse resp)
 				throws ServletException, IOException, ParseException {
-			int id = Integer.parseInt(req.getParameter("id"));
+			String id = req.getParameter("id");
 			String password = req.getParameter("pass");
 			String name = req.getParameter("name");
 			String email = req.getParameter("email");
@@ -173,7 +173,7 @@ public class ListController {
 		@RequestMapping(value = "/update", method = RequestMethod.POST)
 		public String doUpdateUser(HttpServletRequest req, HttpServletResponse resp)
 				throws ServletException, IOException, ParseException {
-			int id = Integer.parseInt(req.getParameter("id"));
+			String id = req.getParameter("id");
 			String password = req.getParameter("pass");
 			String name = req.getParameter("name");
 			String email = req.getParameter("email");
