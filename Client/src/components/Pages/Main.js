@@ -1,7 +1,7 @@
 import React from "react";
-import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBModalFooter, MDBIcon, MDBCardHeader, MDBBtn, MDBInput} from "mdbreact";
-import {NavLink} from 'react-router-dom';
-import Profile from "./Profile";
+import { MDBBtn, MDBInput} from "mdbreact";
+// import {NavLink} from 'react-router-dom';
+// import Profile from "./Profile";
 
 class Main extends React.Component {
     render() {

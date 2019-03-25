@@ -108,15 +108,12 @@ public class CRUDRestController {
 			
 			// cannot update username since username is a primary key
 			// not run u = user;
-			u.setMoneyAccount(user.getMoneyAccount());
 			u.setBirthday(user.getBirthday());
 			u.setEmail(user.getEmail());
 			u.setFacebook(user.getFacebook());
 			u.setGender(user.getGender());
 			u.setIdCard(user.getIdCard());
 			u.setIdDegree(user.getIdDegree());
-			u.setIdRight(user.getIdRight());
-			u.setId(user.getId());
 			u.setIdDistrict(user.getIdDistrict());
 			u.setIdProvince(user.getIdProvince());
 			u.setName(user.getName());
@@ -128,6 +125,18 @@ public class CRUDRestController {
 			userService.updateUser(u);
 			
 			return new ResponseEntity<User>(u, HttpStatus.OK);
+		}
+		
+		//API for React-app
+		@RequestMapping(value="/updateUser", method = RequestMethod.PUT)
+		public ResponseEntity<User> updateUser(@RequestBody User user){
+			if(user == null) {
+				return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+			}			
+			System.out.println("USER_update: "+ user.getName());
+			userService.updateUser(user);
+			
+			return new ResponseEntity<User>(user, HttpStatus.OK);
 		}
 		
 		

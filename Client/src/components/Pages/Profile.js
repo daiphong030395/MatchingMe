@@ -9,7 +9,8 @@ export default class Profile extends Component{
         this.state = {
             'onEdit' : false,
             user : JSON.parse(localStorage.getItem("user")),
-            'province':''
+            'province':'',
+            data: []
         }
     }
     componentDidMount(){
@@ -45,31 +46,49 @@ export default class Profile extends Component{
         }
     }
     getAPI(){
-        fetch(' http://localhost:8080//MatchingMe/province',{
-          mode: "cors",
-          method: "POST",
-          headers:{ 
-            // "Chrome Extension Allow-Control-Allow-Origin": '*',
-            // "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
-            "Access-Control-Allow-Origin": "http://localhost:3000",
-            // 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
-            // "Allow-Credentials": true,
-            'Accept': 'application/json',
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({"matp": 2})
-        })
-        .then(Response => Response.json())
-        .then(data => {
-          console.log(data.matp);
-        //   this.setState({
-        //       'province' : data.name
-        //   })
-        })
-        .catch(function (err) {
-          console.log(err);
-        }); 
-      }
+        // fetch(' http://localhost:8080//MatchingMe/province',{
+        //   mode: "cors",
+        //   method: "POST",
+        //   headers:{ 
+        //     // "Chrome Extension Allow-Control-Allow-Origin": '*',
+        //     // "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+        //     "Access-Control-Allow-Origin": "http://localhost:3000",
+        //     // 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+        //     // "Allow-Credentials": true,
+        //     'Accept': 'application/json',
+        //     "Content-Type": "application/json"
+        //   },
+        //   body: JSON.stringify({"matp": 2})
+        // })
+        // .then(Response => Response.json())
+        // .then(data => {
+        //   console.log(data.matp);
+        // //   this.setState({
+        // //       'province' : data.name
+        // //   })
+        // })
+        // .catch(function (err) {
+        //   console.log(err);
+        // }); 
+        // fetch("http://localhost:8080//MatchingMe/posts")
+        // .then(response => response.json())
+        // .then(data => {
+        //     let posts = [];
+        //     data.map(row => {
+        //         posts.push(row)
+        //         return posts
+        //     })
+        //     this.setState({
+        //         data : posts
+        //     });
+        //     console.log('ComponentDidMount-state.data-GET-ALL-POST: ',this.state.data);
+        // })
+        // .catch(error=>{
+        //     console.log('Rollback-Error: ',error)
+        // })
+    }
+
+
     render(){
         const user = this.state.user;
         return(

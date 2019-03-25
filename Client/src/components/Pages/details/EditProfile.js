@@ -36,7 +36,7 @@ export default class EditProfile extends Component{
             gender: this.state.user.gender,
             idProvince: this.state.user.idProvince,
             idcard: this.state.user.idCard
-        })
+        });
         
     }
 
@@ -66,32 +66,60 @@ export default class EditProfile extends Component{
         this.setState({
             'disableForm' : !this.state.disableForm
         });
-        if(this.state.disableForm === false){
+        if(this.state.disableForm === true){
             console.log("UPDATE DATA")
-        }
-        let user = this.state.user;
-        user.name = this.state.name;
-        user.email = this.state.email;
-        user.phone = this.state.phone;
-        user.gender = this.state.gender;
-        user.idProvince = this.state.idProvince;
-        user.idCard = this.state.idCard;
-        this.setState({
-            user: user
-        });
-        localStorage.setItem("user", JSON.stringify(user));
         
+            //Set state user
+            let user = this.state.user;
+            user.name = this.state.name;
+            user.email = this.state.email;
+            user.phone = this.state.phone;
+            user.gender = this.state.gender;
+            user.idProvince = this.state.idProvince;
+            user.idCard = this.state.idCard;
+            this.setState({
+                user: user
+            });
+            localStorage.setItem("user", JSON.stringify(user));
+            //Transmission Data to Update
+            fetch('http://localhost:8080/MatchingMe/updateUser',{
+            // mode: "cors",
+            method: "PUT",
+            headers:{ 
+                // "Chrome Extension Allow-Control-Allow-Origin": '*',
+                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+                "Access-Control-Allow-Origin": "*",
+                'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+                "Allow-Credentials": true,
+                'Accept': 'application/json',
+                "Content-Type": "application/json"
+              },
+            body:  JSON.stringify(this.state.user)
+            })
+            .then(
+                Response => {Response.json();}
+                )
+            .then(data => {
+            console.log(data);
+            })
+            .catch(function (err) {
+            console.log(err);
+            }); 
+        } else {
+            console.log("NOT UPDATE")
+        }
     }
-
+        
     onClick = nr => () =>{
         this.setState({
           radio: nr
         });
       }
 
-render(){
-    const user = this.state.user;
-    const address = user.idProvince.toString();
+
+    render(){
+        const user = this.state.user;
+        const address = user.idProvince.toString();
     return(
         <div>
             <table className="table table-bordered">
@@ -176,11 +204,13 @@ render(){
                 </tbody>
 			</table>
             {/* <button onClick={this.handleClick} >Chỉnh sửa</button>  */}
-            <Button size="sm" color="primary" onClick={this.handleClick}>Chỉnh sửa</Button>
+            <Button size="sm" color="primary" onClick={this.handleClick.bind(this)}>Chỉnh sửa</Button>
             </div>
-    )
-}
+        );
+        
+    }
 
-}
+    }
+
 
                
