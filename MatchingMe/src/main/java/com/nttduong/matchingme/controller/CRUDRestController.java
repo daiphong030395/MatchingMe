@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.nttduong.matchingme.model.Post;
 import com.nttduong.matchingme.model.Province;
@@ -19,7 +20,7 @@ import com.nttduong.matchingme.model.User;
 import com.nttduong.matchingme.service.PostService;
 //import com.nttduong.matchingme.service.ProvinceService;
 import com.nttduong.matchingme.service.UserService;
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController // combination of @Controller and @ResponseBody annotations
 public class CRUDRestController {
 
