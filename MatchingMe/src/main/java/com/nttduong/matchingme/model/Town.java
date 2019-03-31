@@ -7,24 +7,27 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "devvn_quanhuyen", catalog = "matching_me", uniqueConstraints = @UniqueConstraint(columnNames = "maqh"))
-public class District {
+@Table(name = "devvn_xaphuongthitran", catalog = "matching_me", uniqueConstraints = @UniqueConstraint(columnNames = "xaid"))
+public class Town {
 	@Id
 	@Column
-	private int maqh;
+	private int xaid;
+	
 	@Column
 	private String name;
+	
 	@Column
 	private String type;
+	
 	@Column
-	private String matp;
+	private String maqh;
 
-	public int getMaqh() {
-		return maqh;
+	public int getXaid() {
+		return xaid;
 	}
 
-	public void setMaqh(int maqh) {
-		this.maqh = maqh;
+	public void setXaid(int xaid) {
+		this.xaid = xaid;
 	}
 
 	public String getName() {
@@ -43,11 +46,12 @@ public class District {
 		this.type = type;
 	}
 
-	public String getMatp() {
-		return matp;
+	public String getMaqh() {
+		return maqh;
 	}
 
-	public void setMatp(String matp) {
-		this.matp = matp;
+	public void setMaqh(String maqh) {
+		this.maqh = maqh;
 	}
+
 }

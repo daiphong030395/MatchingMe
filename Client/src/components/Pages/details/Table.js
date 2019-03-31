@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Button } from 'mdbreact';
 
 export default class Table extends Component{
     constructor(){
@@ -27,6 +28,17 @@ export default class Table extends Component{
         })
         
     }
+    displayRight= (idRight) =>{
+        if(idRight === 1){
+            return <p>Admin</p>
+        } else {
+            if(idRight === 2){
+                return <p>Gia sư</p>
+            } else {
+                return <p>Gia chủ</p>
+            }
+        }
+    }
 
     render(){
         return(
@@ -40,6 +52,7 @@ export default class Table extends Component{
                     <td>Birthday</td>
                     <td>Name</td>
                     <td>ID RIGHT</td>
+                    <td>ACTION</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,7 +64,11 @@ export default class Table extends Component{
                         <td>{value.password}</td>
                         <td>{value.birthday}</td>
                         <td>{value.name}</td>
-                        <td>{value.idRight}</td>
+                        <td>{this.displayRight(value.idRight)}</td>
+                        <td>
+                            <Button>Remove</Button>
+                            <Button>Update</Button>
+                        </td>
                     </tr>
                 )
                 }

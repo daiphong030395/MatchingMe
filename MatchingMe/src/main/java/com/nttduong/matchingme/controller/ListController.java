@@ -103,39 +103,39 @@ public class ListController {
 	}
 
 	// Delete User
-	@GetMapping(value = "/user/delete/{id}")
-	public void deleteUserById(@PathVariable("id") int id, HttpServletResponse response) {
-		userService.deleteById(id);
-		try {
-			response.sendRedirect("/MatchingMe/admin/list");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	//Link to Form Edit user for user
-	@RequestMapping("/user/update/{id}")
-	public ModelAndView update(@PathVariable("id") String id) {
-		ModelAndView modelAndView = new ModelAndView("Test");
-		
-		User user = userService.findById(id);
-		modelAndView.addObject("user", user);
-		
-		System.out.println("User ID: " + id);
-		return modelAndView;
-	}
-	//Link to Form Edit user for admin
-	@RequestMapping("/admin/update/{id}")
-	public ModelAndView updateAd(@PathVariable("id") String id) {
-		ModelAndView modelAndView = new ModelAndView("FormEdit");
-		
-		User user = userService.findById(id);
-		modelAndView.addObject("user", user);
-		
-		System.out.println("User ID: " + id);
-		return modelAndView;
-	}
+//	@GetMapping(value = "/user/delete/{id}")
+//	public void deleteUserById(@PathVariable("id") int id, HttpServletResponse response) {
+//		userService.deleteById(id);
+//		try {
+//			response.sendRedirect("/MatchingMe/admin/list");
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+//
+//	//Link to Form Edit user for user
+//	@RequestMapping("/user/update/{id}")
+//	public ModelAndView update(@PathVariable("id") String id) {
+//		ModelAndView modelAndView = new ModelAndView("Test");
+//		
+//		User user = userService.findById(id);
+//		modelAndView.addObject("user", user);
+//		
+//		System.out.println("User ID: " + id);
+//		return modelAndView;
+//	}
+//	//Link to Form Edit user for admin
+//	@RequestMapping("/admin/update/{id}")
+//	public ModelAndView updateAd(@PathVariable("id") String id) {
+//		ModelAndView modelAndView = new ModelAndView("FormEdit");
+//		
+//		User user = userService.findById(id);
+//		modelAndView.addObject("user", user);
+//		
+//		System.out.println("User ID: " + id);
+//		return modelAndView;
+//	}
 	
 	// Update
 		/**
@@ -146,29 +146,29 @@ public class ListController {
 		 * @throws IOException
 		 * @throws ParseException
 		 */
-		@RequestMapping(value = "/admin/update", method = RequestMethod.POST)
-		public String doUpdate(HttpServletRequest req, HttpServletResponse resp)
-				throws ServletException, IOException, ParseException {
-			String id = req.getParameter("id");
-			String password = req.getParameter("pass");
-			String name = req.getParameter("name");
-			String email = req.getParameter("email");
-			String phone = req.getParameter("phone");
-			String gender = req.getParameter("gender");
-			
-			User user = userService.findById(id);
-			
-			user.setPassword(password);
-			user.setName(name);
-			user.setEmail(email);
-			user.setPhone(Integer.parseInt(phone));
-			user.setGender(gender);
-			
-			System.out.println("USER_update: "+ user.getName());
-			userService.updateUser(user);
-			resp.sendRedirect("/MatchingMe/admin/list");
-			return "LoginPage";
-		}
+//		@RequestMapping(value = "/admin/update", method = RequestMethod.POST)
+//		public String doUpdate(HttpServletRequest req, HttpServletResponse resp)
+//				throws ServletException, IOException, ParseException {
+//			String id = req.getParameter("id");
+//			String password = req.getParameter("pass");
+//			String name = req.getParameter("name");
+//			String email = req.getParameter("email");
+//			String phone = req.getParameter("phone");
+//			String gender = req.getParameter("gender");
+//			
+//			User user = userService.findById(id);
+//			
+//			user.setPassword(password);
+//			user.setName(name);
+//			user.setEmail(email);
+//			user.setPhone(Integer.parseInt(phone));
+//			user.setGender(gender);
+//			
+//			System.out.println("USER_update: "+ user.getName());
+//			userService.updateUser(user);
+//			resp.sendRedirect("/MatchingMe/admin/list");
+//			return "LoginPage";
+//		}
 		//User Update
 		@RequestMapping(value = "/update", method = RequestMethod.POST)
 		public String doUpdateUser(HttpServletRequest req, HttpServletResponse resp)

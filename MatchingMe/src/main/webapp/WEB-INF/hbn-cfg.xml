@@ -29,6 +29,8 @@
 				<value>com.nttduong.matchingme.model.Post</value>
 				<value>com.nttduong.matchingme.model.Right</value>
 				<value>com.nttduong.matchingme.model.Province</value>
+				<value>com.nttduong.matchingme.model.District</value>
+				<value>com.nttduong.matchingme.model.Town</value>
 			</list>
 		</property>
 	</bean>

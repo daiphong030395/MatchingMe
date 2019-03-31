@@ -25,15 +25,15 @@ class FormLogin extends React.Component{
   
   getAPI(){
     fetch('http://localhost:8080//MatchingMe/login',{
-      // mode: "cors",
+      // mode: "no-cors",
       method: "POST",
       headers:{ 
         // "Chrome Extension Allow-Control-Allow-Origin": '*',
-        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+        // "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
         "Access-Control-Allow-Origin": "http://localhost:3000/profile",
         'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
-        "Allow-Credentials": true,
-        'Accept': 'application/json',
+        // "Allow-Credentials": true,
+        // 'Accept': 'application/json',
         "Content-Type": "application/json"
       },
       body: JSON.stringify({"username": this.state.username, "password": this.state.password})

@@ -8,7 +8,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.nttduong.matchingme.model.District;
 import com.nttduong.matchingme.model.Province;
+import com.nttduong.matchingme.model.Town;
 import com.nttduong.matchingme.model.User;
 
 //@Repository(value = "userDAO")
@@ -31,8 +33,7 @@ public class UserDaoImpl implements UserDao {
 //			u = (User) session.get(User.class, id);
 			u = (User) session.createQuery("From com.nttduong.matchingme.model.User U WHERE U.id = " + id)
 					.getSingleResult();
-			System.out.println("UserDAO_FindById_Name: " + u.getUsername());
-//			System.out.println("UserDAO_FindById_Birthday: " + u.getBirthday());
+			System.out.println("DAO(FindById): " + u.getUsername());
 			transaction.commit();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -160,7 +161,7 @@ public class UserDaoImpl implements UserDao {
 		Transaction transaction = session.beginTransaction();
 		if (user != null) {
 			try {
-				System.out.println("DAO_UpdateUser_Name: " + user.getName());
+				System.out.println("DAO(Update): " + user.getUsername());
 				
 				//c1: .update(user)
 				
@@ -205,6 +206,42 @@ public class UserDaoImpl implements UserDao {
 		}
 		session.close();
 		return p;
+	}
+
+	@Override
+	public District findDistrictById(int id) {
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		District d = new District();
+		try {
+			d = (District) session.createQuery("From com.nttduong.matchingme.model.District P WHERE P.maqh = " + id)
+					.getSingleResult();
+			System.out.println("DAO(Find-District): " + d.getName());
+			transaction.commit();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			transaction.rollback();
+		}
+		session.close();
+		return d;
+	}
+
+	@Override
+	public Town findTownById(int id) {
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Town d = new Town();
+		try {
+			d = (Town) session.createQuery("From com.nttduong.matchingme.model.Town P WHERE P.xaid = " + id)
+					.getSingleResult();
+			System.out.println("DAO(Find-Town): " + d.getName());
+			transaction.commit();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			transaction.rollback();
+		};
+		session.close();
+		return d;
 	}
 	
 }

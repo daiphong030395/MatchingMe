@@ -7,6 +7,13 @@
   color: #61dafb;
 }
 
+.logo{
+  width: 150 px;
+  height: 150 px;
+}
+.bg-img{
+  background-image: url('./image/banner2.png');
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -28,8 +35,8 @@ body{
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  /* background-color: #EDEDEE; */
-  background-image: url("/image/pika.jsp");
+  /* background-color: black; */
+  /* background-image: url("/image/pika.jsp"); */
 }
 
 a{
@@ -73,7 +80,7 @@ main {
 }
 
 #content{
-  margin-left: 120px;
+  margin-left:  270px;
 }    
 
 
@@ -234,6 +241,7 @@ main {
     flex-direction: column;
   }
 }
+
 
 
 

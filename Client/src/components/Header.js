@@ -46,19 +46,19 @@ class Header extends Component {
                                 <NavLink to="#">Trang chủ</NavLink> 
                             </NavItem>
                             <NavItem>
-                                <a rel="noopener noreferrer" className="nav-link Ripple-parent" href="./#" target="_blank"> Đăng ký trở thành gia sư </a>
+                                <a rel="noopener noreferrer" className="nav-link Ripple-parent" href="./signup" target="_blank"> Đăng ký trở thành gia sư </a>
                             </NavItem>
                             <NavItem>
-                                <a rel="noopener noreferrer" className="nav-link Ripple-parent" href="./#" target="_blank"> Tìm gia sư </a>
+                                <a rel="noopener noreferrer" className="nav-link Ripple-parent" href="./post/tutor" target="_blank"> Tìm gia sư </a>
                             </NavItem>
                             <NavItem>
-                                <a rel="noopener noreferrer" className="nav-link Ripple-parent" href="./#" target="_blank"> Tìm lớp mới </a>
+                                <a rel="noopener noreferrer" className="nav-link Ripple-parent" href="./post/host" target="_blank"> Tìm lớp mới </a>
                             </NavItem>
                             <NavItem>
-                                <a rel="noopener noreferrer" className="nav-link Ripple-parent" href="./#" target="_blank"> Diễn đàn trao đổi </a>
+                                <a rel="noopener noreferrer" className="nav-link Ripple-parent" href="./forum" target="_blank"> Diễn đàn trao đổi </a>
                             </NavItem>
                             <NavItem>
-                                <a rel="noopener noreferrer" className="nav-link Ripple-parent" href="./#" target="_blank"> Trợ giúp </a>
+                                <a rel="noopener noreferrer" className="nav-link Ripple-parent" href="./help" target="_blank"> Trợ giúp </a>
                             </NavItem>
                         </NavbarNav>
                         <NavbarNav right>

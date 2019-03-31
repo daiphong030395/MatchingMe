@@ -2,7 +2,9 @@ package com.nttduong.matchingme.service;
 
 import java.util.List;
 
+import com.nttduong.matchingme.model.District;
 import com.nttduong.matchingme.model.Province;
+import com.nttduong.matchingme.model.Town;
 import com.nttduong.matchingme.model.User;
 
 public interface UserService {
@@ -27,7 +29,9 @@ public interface UserService {
 	
 	//TEST
 	public Province findProvinceById(int id);
-
+	public District findDistrictById(int id);
+	public Town findTownById(int id);
+	
 
 }
 //@Path("/user")

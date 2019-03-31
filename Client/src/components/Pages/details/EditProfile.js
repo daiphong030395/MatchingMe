@@ -14,8 +14,14 @@ export default class EditProfile extends Component{
             phone: '',
             gender: '',
             idProvince: '',
-            idcard: ''
+            idcard: '',
+            address:'',
+            town:'',
+            district:'',
+            province:''
         }
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount(){
@@ -37,21 +43,72 @@ export default class EditProfile extends Component{
             idProvince: this.state.user.idProvince,
             idcard: this.state.user.idCard
         });
-        
+        this.getAddress();
+    }
+    getAddress(){
+        // fetch(' http://localhost:8080//MatchingMe/getprovince',{
+        //   mode: "no-cors",
+        //   method: "POST",
+        //   headers:{ 
+        //     "Access-Control-Allow-Origin": "*",
+        //     // 'Accept': 'application/json',
+        //     'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+        //     "Content-Type": "application/json"
+        //   },
+        //   body: JSON.stringify({"matp": this.state.user.idProvince})
+        // })
+        // .then(Response => Response.json())
+        // .then(data => {
+        //   console.log(data);
+        //   this.setState({
+        //       'address' : data.name
+        //   })
+        //   console.log(this.state.address);
+        // })
+        // .catch(function (err) {
+        //   console.log(err);
+        // }); 
+        fetch(' http://localhost:8080//MatchingMe/getAddress',{
+          mode: "cors",
+          method: "POST",
+          headers:{ 
+            "Access-Control-Allow-Origin": "*",
+            // 'Accept': 'application/json',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+            "Content-Type": "application/json"
+          },
+            body: JSON.stringify({  "idProvince": this.state.user.idProvince,
+                                    "idDistrict": this.state.user.idDistrict,
+                                    "idTown": this.state.user.idTown })
+        })
+        .then(Response => Response.json())
+        .then(data => {
+          console.log(data);
+          this.setState({
+              'address' : data.address,
+              'town'    : data.nameTown,
+              'district': data.nameDistrict,
+              'province': data.nameProvince
+          })
+        //   console.log(this.state.address);
+        })
+        .catch(function (err) {
+          console.log(err);
+        }); 
     }
 
-    displayRight= () =>{
-        if(this.state.user.idRight === 1){
-            return <p>Admin</p>
-        } else {
-            if(this.state.user.idRight === 2){
-                return <p>Gia sư</p>
-            } else {
-                return <p>Gia chủ</p>
-            }
-        }
-    }
-
+    //Display Right Name 
+    // displayRight= () =>{
+    //     if(this.state.user.idRight === 1){
+    //         return <p>Admin</p>
+    //     } else {
+    //         if(this.state.user.idRight === 2){
+    //             return <p>Gia sư</p>
+    //         } else {
+    //             return <p>Gia chủ</p>
+    //         }
+    //     }
+    // }
 
     //HANDLE FORM INPUT
     handleChange = (evt) =>{
@@ -60,16 +117,23 @@ export default class EditProfile extends Component{
         console.log("name input change: ", evt.target.name);
         console.log("value input change: ", evt.target.value);
     }
-
-    handleClick=()=>{
-        console.log("handleClick: Edit Profile");
+    //HANDLE Radio Input
+    onClick = nr => () =>{
+        this.setState({
+          radio: nr
+        });
+    }
+    //BUTTON UPDATE 
+    handleSubmit=(event)=>{
+        // event.preventDefault();
+        console.log("handleSubmit: Edit Profile");
         this.setState({
             'disableForm' : !this.state.disableForm
         });
         if(this.state.disableForm === true){
-            console.log("UPDATE DATA")
-        
-            //Set state user
+            console.log("AVAILABLE UPDATE");            
+        } else {
+            //Set value input for state user
             let user = this.state.user;
             user.name = this.state.name;
             user.email = this.state.email;
@@ -80,49 +144,41 @@ export default class EditProfile extends Component{
             this.setState({
                 user: user
             });
-            localStorage.setItem("user", JSON.stringify(user));
+            // console.log("User after set:", this.state.user);
+            localStorage.setItem("user", JSON.stringify(this.state.user));
             //Transmission Data to Update
-            fetch('http://localhost:8080/MatchingMe/updateUser',{
-            // mode: "cors",
+            fetch('http://localhost:8080/MatchingMe/user/'+ this.state.user.id,{
+            mode: "cors",
             method: "PUT",
             headers:{ 
-                // "Chrome Extension Allow-Control-Allow-Origin": '*',
-                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
                 "Access-Control-Allow-Origin": "*",
                 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
-                "Allow-Credentials": true,
-                'Accept': 'application/json',
                 "Content-Type": "application/json"
               },
             body:  JSON.stringify(this.state.user)
             })
-            .then(
-                Response => {Response.json();}
-                )
+            .then(Response => Response.json())
             .then(data => {
-            console.log(data);
+                console.log('http://localhost:8080/MatchingMe/user/'+ this.state.user.id)
+                console.log('RESPONSE(data): ',data);
             })
             .catch(function (err) {
             console.log(err);
             }); 
-        } else {
-            console.log("NOT UPDATE")
+            console.log("UPDATED")
+            // alert('A name was submitted: ' + this.state.user.name);
+            // event.preventDefault();
         }
     }
-        
-    onClick = nr => () =>{
-        this.setState({
-          radio: nr
-        });
-      }
-
 
     render(){
         const user = this.state.user;
-        const address = user.idProvince.toString();
+        // const address = this.state.address;
+        var bday = new Date();
+        bday = this.state.user.birthday;
     return(
         <div>
-            <table className="table table-bordered">
+            <table className="table">
                 <tbody>
                 <tr>
 					<th  width="20%" >Tên tài khoản</th>
@@ -142,37 +198,48 @@ export default class EditProfile extends Component{
 				<tr>
 					<th>Mật khẩu</th>
 					<td>
-                        <input type="password"
-						defaultValue={user.password} name="password" id="pass" disabled />
+                        <input type="password"  defaultValue={user.password}  name="password" id="pass" disabled />
+                    </td>
+				</tr>
+                <tr>
+					<th>Ngày sinh</th>
+					<td>
+                        {/* {this.state.user.birthday} */}
+                        {bday}
                     </td>
 				</tr>
 				<tr>
 					<th>Email</th>
 					<td>
                         <input type="text"
-						defaultValue={user.email} name="email" id="email" disabled={this.state.disableForm}/>
+                        defaultValue={user.email} name="email" id="email" 
+                        onChange={this.handleChange}  
+                        disabled={this.state.disableForm}/>
                     </td>
 				</tr>
 				<tr>
 					<th>Số điện thoại</th>
 					<td>
                         <input type="text"
-						defaultValue={user.phone} name="phone" id="phone" disabled={this.state.disableForm}/>
+                        defaultValue={user.phone} name="phone" id="phone" 
+                        onChange={this.handleChange}  
+                        disabled={this.state.disableForm}/>
                     </td>
 				</tr>
 				<tr>
 					<th>Giới tính</th>
-					<td>
+					<td >
                         {/* <input type="text"
 						defaultValue={user.gender} name="gender" /> */}
-                        <MDBFormInline>
+                        <MDBFormInline className="radioGender">
                             <MDBInput 
                                 gap 
                                 onClick={this.onClick(1)} 
                                 checked={this.state.radio===1 ? true : false} 
-                                label="Name" 
+                                label="Nam" 
                                 type="radio" 
                                 id="radio1" 
+                                value="Male"
                                 disabled={this.state.disableForm}
                             />
                             <MDBInput 
@@ -182,29 +249,47 @@ export default class EditProfile extends Component{
                                 label="Nữ" 
                                 type="radio" 
                                 id="radio2"
+                                value="Female"
                                 disabled={this.state.disableForm}
                             />
                         </MDBFormInline>
                     </td>
 				</tr>
                 <tr>
-					<th>Nơi ở (Tỉnh)</th>
+					<th>Nơi ở (Phường/Xã, Quận/Huyện, Tỉnh/Thành Phố)</th>
 					<td>
                         <input type="text"
-						defaultValue={address} name="idProvince" disabled={this.state.disableForm} />
+                            width = "150"
+                            defaultValue={this.state.town} name="idTown" 
+                            disabled={true}
+                        />
+                        <br />
+                        <input type="text"
+                            width = "150"
+                            defaultValue={this.state.district} name="idDistrict" 
+                            disabled={true} 
+                        />
+                        <br />
+                        <input type="text"
+                            width = "150"
+                            defaultValue={this.state.province} name="idProvince" 
+                            disabled={true} 
+                        />
                     </td>
 				</tr>
                 <tr>
 					<th>Số CMTND</th>
 					<td>
                         <input type="text"
-						defaultValue={user.idCard} name="idCard" disabled={this.state.disableForm} />
+                        defaultValue={user.idCard} name="idCard" id="idCard" 
+                        onChange={this.handleChange}  
+                        disabled={this.state.disableForm} />
                     </td>
 				</tr>
                 </tbody>
 			</table>
             {/* <button onClick={this.handleClick} >Chỉnh sửa</button>  */}
-            <Button size="sm" color="primary" onClick={this.handleClick.bind(this)}>Chỉnh sửa</Button>
+            <Button type="submit" size="sm" color="primary" onClick={this.handleSubmit.bind(this)}>Chỉnh sửa</Button>
             </div>
         );
         
