@@ -6,7 +6,7 @@ import Routes from './components/Routes';
 import Footer from './components/Footer.js';
 
 class App extends Component {
-
+  
   render() {
     return (
       <div>

@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService,UserDetailsService {
 	}
 
 	@Override
-	public User findById(String id) {
+	public User findById(int id) {
 		User result = userDao.findById(id);
 		System.out.println("SERVICE (findById): " + result.getUsername());
 		return result;

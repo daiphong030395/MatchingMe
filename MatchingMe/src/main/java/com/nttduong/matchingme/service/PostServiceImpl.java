@@ -26,7 +26,30 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public Post findPostById(int id) {
 		// TODO Auto-generated method stub
-		return this.findPostById(id);
+		return postDao.findPostById(id);
+	}
+
+	@Override
+	public Post findPostByType(String type) {
+		// TODO Auto-generated method stub
+		return postDao.findPostByType(type);
+	}
+
+	@Override
+	public Post findPostByIdUser(int idUser) {
+		// TODO Auto-generated method stub
+		return postDao.findPostByIdUser(idUser);
+	}
+	
+	@Override
+	public void savePost(Post post) {
+		postDao.savePost(post);		
+	}
+
+	@Override
+	public void deleteById(int id) {
+		// TODO Auto-generated method stub
+		postDao.deleteById(id);
 	}
 
 }

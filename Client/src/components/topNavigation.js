@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand, NavbarNav, NavbarToggler, Collapse, NavItem, NavLink, Fa } from 'mdbreact';
+import {FormInline, Button, Navbar, NavbarBrand, NavbarNav, NavbarToggler, Collapse, NavItem, Fa } from 'mdbreact';
+
 
 class TopNavigation extends Component {
     constructor(props) {
         super(props);
         this.state = {
             collapse: false,
+            isLogin: false,
+            isLogout: false
         };
     this.onClick = this.onClick.bind(this);
     this.toggle = this.toggle.bind(this);
+    }
+
+    componentDidMount(){
+        if(localStorage.getItem('user') !== null){
+            this.setState({
+                isLogin: true
+            })
+        }
     }
 
     onClick(){
@@ -23,6 +34,15 @@ class TopNavigation extends Component {
         });
     }
 
+    onHandleSignOut(){
+        console.log("Handle Sign out");
+        if (window.confirm('Bạn có muốn đăng xuất không?')) {
+            localStorage.removeItem('user');
+            window.location.reload();
+            console.log("Logout OK")
+        }
+    }
+
     render() {
         return (
             <Navbar className="flexible-navbar " light expand="md" scrolling>
@@ -31,7 +51,7 @@ class TopNavigation extends Component {
                 </NavbarBrand>
                 <NavbarToggler onClick = { this.onClick } />
                 <Collapse isOpen = { this.state.collapse } navbar>
-                    <NavbarNav left>
+                    {/* <NavbarNav left>
                         <NavItem active>
                             <NavLink to="#">Trang chủ</NavLink> 
                         </NavItem>
@@ -75,24 +95,66 @@ class TopNavigation extends Component {
                                 target="_blank"
                             > Trợ giúp </a>
                         </NavItem>
-                    </NavbarNav>
-                    <NavbarNav right>
-                        <NavItem>
-                            <a 
-                                className="border border-light rounded mr-1 nav-link Ripple-parent" 
-                                rel="noopener noreferrer" 
-                                href="./signup" 
-                                target="_blank"
-                            ><Fa icon="github" className="mr-2"/> Đăng ký </a>
-                        </NavItem>
-                        <NavItem>
-                            <a 
-                                className="border border-light rounded mr-1 nav-link Ripple-parent" 
-                                rel="noopener noreferrer"  
-                                href="./login" 
-                                target="_blank"> Đăng nhập </a>
-                        </NavItem>
-                    </NavbarNav>
+                    </NavbarNav> */}
+                    <nav>
+                        <FormInline className="md-form m-0" >
+                            <input className="form-control form-control-sm" type="search" placeholder="Tìm kiếm" aria-label="Search"/>
+                            <Button size="sm" color="primary" className="my-0" type="submit"><Fa icon="search" /></Button>
+                        </FormInline>
+                    </nav>
+                    { !this.state.isLogin
+                        ?<NavbarNav right>
+                            <NavItem>
+                                <a 
+                                    className="border border-light rounded mr-1 nav-link Ripple-parent" 
+                                    rel="noopener noreferrer" 
+                                    href="./" 
+                                    target="_blank"
+                                ><Fa icon="github" className="mr-2"/> Trang chủ </a>
+                            </NavItem>
+                            <NavItem>
+                                <a 
+                                    className="border border-light rounded mr-1 nav-link Ripple-parent" 
+                                    rel="noopener noreferrer" 
+                                    href="./signup" 
+                                    target="_blank"
+                                ><Fa icon="github" className="mr-2"/> Đăng ký </a>
+                            </NavItem>
+                            <NavItem>
+                                <a 
+                                    className="border border-light rounded mr-1 nav-link Ripple-parent" 
+                                    rel="noopener noreferrer"  
+                                    href="./login" 
+                                    target="_blank"> Đăng nhập </a>
+                            </NavItem>
+                            </NavbarNav>
+                        :<NavbarNav right>
+                            <NavItem>
+                                <a 
+                                    className="border border-light rounded mr-1 nav-link Ripple-parent" 
+                                    rel="noopener noreferrer" 
+                                    href="./" 
+                                    target="_blank"
+                                ><Fa icon="github" className="mr-2"/> Trang chủ </a>
+                            </NavItem>
+                            <NavItem>
+                                <a 
+                                    className="border border-light rounded mr-1 nav-link Ripple-parent" 
+                                    rel="noopener noreferrer"  
+                                    href="./profile1" 
+                                    target="_blank"> Trang cá nhân </a>
+                            </NavItem>
+                            <NavItem>
+                                {/* <a 
+                                    className="border border-light rounded mr-1 nav-link Ripple-parent" 
+                                    rel="noopener noreferrer"  
+                                    href="./" 
+                                    target="_blank"> Đăng xuất </a> */}
+                                <Button size="sm" type="submit" onClick={this.onHandleSignOut}><Fa icon="sign-out" /> Đăng xuất </Button>
+                            </NavItem>
+                        </NavbarNav>
+                    }
+                    
                 </Collapse>
             </Navbar>
         );

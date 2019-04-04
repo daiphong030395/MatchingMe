@@ -55,6 +55,96 @@ public class PostDaoImpl implements PostDao {
 		return arrPost;
 	}
 
+	@Override
+	public Post findPostByType(String type) {
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Post p = new Post();
+		try {
+			p = (Post) session.createQuery("From com.nttduong.matchingme.model.Post P WHERE P.Type = " + type)
+					.getSingleResult();
+			System.out.println("DAO(FindByType)"+p.getId());
+			transaction.commit();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			transaction.rollback();
+		}
+		session.close();
+		return p;
+	}
+
+	@Override
+	public Post findPostByIdUser(int idUser) {
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Post p = new Post();
+		try {
+			p = (Post) session.createQuery("From com.nttduong.matchingme.model.Post P WHERE P.Id_User = " + idUser)
+					.getSingleResult();
+			System.out.println("DAO(FindByIdUser)"+p.getId());
+			transaction.commit();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			transaction.rollback();
+		}
+		session.close();
+		return p;
+	}
+
+	@Override
+	public void savePost(Post post) {
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		try {
+			session.save(post);
+			transaction.commit();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			transaction.rollback();
+		}
+		session.close();
+		
+	}
+
+	@Override
+	public void deleteById(int id) {
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Post p = new Post();
+		try {
+			p = (Post) session.createQuery("From com.nttduong.matchingme.model.Post P WHERE P.id = " + id)
+					.getSingleResult();
+			session.delete(p);
+			System.out.println("DAO-DeleteById-OK: " +p.getId());
+			transaction.commit();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			transaction.rollback();
+		}
+		session.close();
+		
+	}
+
+	@Override
+	public void updatePost(Post post) {
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		if (post != null) {
+			try {
+				System.out.println("DAO(UpdatePost): " + post.getId());
+				
+				//c1: .update(user)
+				
+				session.update(post);
+				transaction.commit();
+			} catch (Exception e) {
+				transaction.rollback();
+			}
+		}
+		session.close();
+		
+	}
+
 
 }
 

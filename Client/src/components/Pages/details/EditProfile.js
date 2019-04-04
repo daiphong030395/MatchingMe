@@ -12,7 +12,7 @@ export default class EditProfile extends Component{
             name: '',
             email: '',
             phone: '',
-            gender: '',
+            gender: '', 
             idProvince: '',
             idcard: '',
             address:'',
@@ -46,28 +46,6 @@ export default class EditProfile extends Component{
         this.getAddress();
     }
     getAddress(){
-        // fetch(' http://localhost:8080//MatchingMe/getprovince',{
-        //   mode: "no-cors",
-        //   method: "POST",
-        //   headers:{ 
-        //     "Access-Control-Allow-Origin": "*",
-        //     // 'Accept': 'application/json',
-        //     'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
-        //     "Content-Type": "application/json"
-        //   },
-        //   body: JSON.stringify({"matp": this.state.user.idProvince})
-        // })
-        // .then(Response => Response.json())
-        // .then(data => {
-        //   console.log(data);
-        //   this.setState({
-        //       'address' : data.name
-        //   })
-        //   console.log(this.state.address);
-        // })
-        // .catch(function (err) {
-        //   console.log(err);
-        // }); 
         fetch(' http://localhost:8080//MatchingMe/getAddress',{
           mode: "cors",
           method: "POST",
@@ -96,19 +74,6 @@ export default class EditProfile extends Component{
           console.log(err);
         }); 
     }
-
-    //Display Right Name 
-    // displayRight= () =>{
-    //     if(this.state.user.idRight === 1){
-    //         return <p>Admin</p>
-    //     } else {
-    //         if(this.state.user.idRight === 2){
-    //             return <p>Gia sư</p>
-    //         } else {
-    //             return <p>Gia chủ</p>
-    //         }
-    //     }
-    // }
 
     //HANDLE FORM INPUT
     handleChange = (evt) =>{
@@ -144,8 +109,8 @@ export default class EditProfile extends Component{
             this.setState({
                 user: user
             });
-            // console.log("User after set:", this.state.user);
             localStorage.setItem("user", JSON.stringify(this.state.user));
+            
             //Transmission Data to Update
             fetch('http://localhost:8080/MatchingMe/user/'+ this.state.user.id,{
             mode: "cors",

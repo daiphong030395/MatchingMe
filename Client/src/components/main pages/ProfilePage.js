@@ -1,8 +1,22 @@
 import React from 'react'
 import { Card, Col, Row, View, Mask, CardImage, CardBody, CardTitle, CardText, CardFooter, Button, Fa } from 'mdbreact';
 import src1 from '../../image/baby.jpg';
+// import {NavLink, Redirect} from 'react-router-dom';
+// import Profile from '../Pages/Profile';
 
-const ProfilePage =  () => {
+export default class ProfilePage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isDisplay: false
+    }
+  }
+  onHandleClick= () =>{
+    this.setState({
+      isDisplay: !this.state.isDisplay
+    })
+  }
+  render(){
   return (
     <React.Fragment>
         <Row className="justify-content-center">
@@ -17,7 +31,7 @@ const ProfilePage =  () => {
                         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione perferendis quod animi dignissimos consectetur quibusdam numquam laboriosam, minus, provident...
                     </CardText>
                     <div className="row justify-content-end pr-1">
-                        <Button size="sm" outline color="primary">More...</Button>
+                        <Button size="sm" onClick={this.onHandleClick} outline color="primary">More...</Button>
                     </div>
                 </CardBody>
             </Card>
@@ -121,6 +135,6 @@ const ProfilePage =  () => {
     </Row>
     </React.Fragment>
   );
+  }
 }
 
-export default ProfilePage;

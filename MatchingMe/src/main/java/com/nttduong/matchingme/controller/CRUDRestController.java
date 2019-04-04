@@ -40,7 +40,7 @@ public class CRUDRestController {
 
 	// Get Single user
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> getUser(@PathVariable("id") String i) {
+	public ResponseEntity<User> getUser(@PathVariable("id") int i) {
 		User u = userService.findById(i);
 		if (u.getUsername() == null) {
 			return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
@@ -67,14 +67,31 @@ public class CRUDRestController {
 			System.out.println("Name_new: " + user.getName());
 			//not run
 			if (userService.isExit(user)) { 		
-//			if(userService.findById(user.getIdUser()).getName() != null) {
 				return new ResponseEntity<Void>(HttpStatus.CONFLICT); // => 409 Indicates that the request could not be processed because of conflict in the current state of the resource
 			}
 			System.out.println(userService.isExit(user));
 			userService.saveUser(user);
 			return new ResponseEntity<Void>(HttpStatus.CREATED); // => 201 The request has been fulfilled, resulting in the creation of a new resource
 		}
+		//Insert new user from react-app
+		@RequestMapping(value="/insert-user", method = RequestMethod.POST)
+		public ResponseEntity<User> insertUser(@RequestBody User user) { 
+			System.out.println("isExit:"+ userService.isExit(user));
+			userService.saveUser(user);
+			return new ResponseEntity<User>(user,HttpStatus.CREATED); // => 201 The request has been fulfilled, resulting in the creation of a new resource
+		}
 		
+	//Check User by username
+		@RequestMapping(value="/check-user-by-username", method = RequestMethod.PUT)
+		public ResponseEntity<User> checkUsername(@RequestBody User user) {
+			String username = user.getUsername();
+			User u = userService.findByUsername(username);
+			if (u.getUsername() == null) {			
+				return new ResponseEntity<User>(u,HttpStatus.NO_CONTENT); 
+			} else {
+				return new ResponseEntity<User>(u,HttpStatus.CONFLICT);
+			}
+		}
 		
 		
 		
@@ -103,7 +120,7 @@ public class CRUDRestController {
 		
 		// Update User
 		@RequestMapping(value="/user/{id}", method = RequestMethod.PUT)
-		public ResponseEntity<User> update(@PathVariable("id") String id, @RequestBody User user){
+		public ResponseEntity<User> update(@PathVariable("id") int id, @RequestBody User user){
 //			System.out.println("!!!!! REQUEST BODY: " + user.getId() +", " + user.getUsername() + ", " + user.getName());
 			User u = userService.findById(id);
 			if(u == null) {
@@ -118,7 +135,7 @@ public class CRUDRestController {
 			u.setFacebook(user.getFacebook());
 			u.setGender(user.getGender());
 			u.setIdCard(user.getIdCard());
-			u.setIdDegree(user.getIdDegree());
+			u.setIdDegree(user.getIdDegree()); 
 			u.setIdDistrict(user.getIdDistrict());
 			u.setIdProvince(user.getIdProvince());
 			u.setName(user.getName());
@@ -148,10 +165,7 @@ public class CRUDRestController {
 		// Check login
 		@RequestMapping(value="/login", method = RequestMethod.POST)
 		public ResponseEntity<User> checklogin(@RequestBody User user){
-			
 			User u = userService.findByUsername(user.getUsername());
-//			System.out.println("pass u: " + u.getPassword());
-//			System.out.println("pass user: " + user.getPassword());
 			if(user.getPassword().equals(u.getPassword())) {
 				System.out.println("True");
 				System.out.println(u);
@@ -171,15 +185,6 @@ public class CRUDRestController {
 			System.out.println("Controller_Province_id: " + p.getMatp());
 			return new ResponseEntity<Province>(p, HttpStatus.OK);
 		}
-			//Not working
-//		@RequestMapping(value="/getProvince", method = RequestMethod.POST) 
-//		public ResponseEntity<Province> getProvince(@RequestBody Province prv){
-//			int id = prv.getMatp();
-//			Province p = new Province();
-//			p = provinceService.getProvinceName(id); //--> DISABLE???
-//			System.out.println("Controller_Province_id: " + p.getMatp());
-//			return new ResponseEntity<Province>(p, HttpStatus.OK);
-//		}
 		
 		//GET PROVINCE NAME
 		@RequestMapping(value="/getAddress", method = RequestMethod.POST) 

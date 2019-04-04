@@ -13,8 +13,6 @@ import com.nttduong.matchingme.model.Province;
 import com.nttduong.matchingme.model.Town;
 import com.nttduong.matchingme.model.User;
 
-//@Repository(value = "userDAO")
-//@Transactional(rollbackFor = Exception.class)
 public class UserDaoImpl implements UserDao {
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -24,13 +22,13 @@ public class UserDaoImpl implements UserDao {
 		this.sessionFactory = sessionFactory;
 	}
 
+	//find user by id
 	@Override
-	public User findById(String id) {
+	public User findById(int id) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		User u = new User();
 		try {
-//			u = (User) session.get(User.class, id);
 			u = (User) session.createQuery("From com.nttduong.matchingme.model.User U WHERE U.id = " + id)
 					.getSingleResult();
 			System.out.println("DAO(FindById): " + u.getUsername());

@@ -1,5 +1,7 @@
 package com.nttduong.matchingme.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,9 +10,14 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "post", catalog = "matching_me", uniqueConstraints = @UniqueConstraint(columnNames = "Id"))
-public class Post {
+@Table(name = "post", catalog = "matchingme", uniqueConstraints = @UniqueConstraint(columnNames = "Id"))
+public class Post implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue
 	@Column

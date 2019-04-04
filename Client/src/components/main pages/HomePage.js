@@ -8,9 +8,10 @@ import ChartSection1 from './sectionsHome/ChartSection1';
 import ChartSection2 from './sectionsHome/ChartSection2';
 // import MapSection from './sectionsHome/MapSection';
 import ModalSection from './sectionsHome/ModalSection';
-import Main from './sectionsHome/Main';
+import Main from './sectionsHome/Banner';
 
 const HomePage =  () => {
+  // window.location.reload();
   return (
     <React.Fragment>
       {/* <BreadcrumSection /> */}

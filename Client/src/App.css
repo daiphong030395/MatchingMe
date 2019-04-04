@@ -13,6 +13,20 @@
 }
 .bg-img{
   background-image: url('./image/banner2.png');
+  height: 250px;
+  width: 150%;
+}
+.pl-100{
+  padding-left: 100px;
+}
+.md-form .form-control {
+  margin: 0 0 0.5rem 0;
+  border-radius: 0;
+  padding: 0.3rem 0 0.55rem 0;
+  background-image: none;
+  background-color: transparent;
+  height: auto;
+  width: 300px;
 }
 @keyframes App-logo-spin {
   from {

@@ -9,10 +9,11 @@ import NotFoundPage from './Pages/NotFoundPage';
 
 import HomePage from './main pages/HomePage';
 import ProfilePage from './main pages/ProfilePage';
-import Post from './main pages/Post';
+import Post from './main pages/post-form/NewPostForm';
 import TablePost from './main pages/TablePost';
 import Forum from './main pages/Forum';
 import Help from './main pages/Help';
+import Register from './main pages/RegisterForm';
 
 class Routes extends React.Component {
   render() {
@@ -20,6 +21,7 @@ class Routes extends React.Component {
       <Switch>
         {/* <Route path='/' exact component={Main} /> */}
         <Route path='/signup' component={FormSignup} />
+        <Route path='/register' component={Register} />
         <Route path='/login' component = {FormLogin} />
         <Route path='/tableUser' component={Table} />
         <Route path='/404' component={NotFoundPage} />

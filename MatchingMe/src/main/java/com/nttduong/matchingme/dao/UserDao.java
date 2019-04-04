@@ -8,7 +8,7 @@ import com.nttduong.matchingme.model.Town;
 import com.nttduong.matchingme.model.User;
 
 public interface UserDao {
-	public User findById(String id);
+	public User findById(int id);
 
 	public User findByUsername(String username);
 	
