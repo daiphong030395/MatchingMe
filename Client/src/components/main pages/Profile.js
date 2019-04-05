@@ -38,7 +38,7 @@ export default class Profile extends Component{
     displayDescription(){
         const intro ="Hãy cho mọi người biết bạn là ai? Kinh nghiệm giảng dạy hay những yêu cầu của bạn khi tìm gia sư.";
         if(this.state.user.description === null){
-            return ({intro});
+            return (intro);
         };
         return this.state.user.description;
     }
@@ -73,8 +73,11 @@ export default class Profile extends Component{
         const user = this.state.user;
         return(
             <React.Fragment>
-                <h2>TRANG CÁ NHÂN</h2>
+                <div className="text-lg-center font-weight-bold bg-success">
+                    <h2>TRANG CÁ NHÂN</h2>
                     <p> Xin chào {user.name} </p>
+                </div>
+                
             <Row className="justify-content-center">
             <Col sm="12" md="6" lg="6" className="mb-5">
                 <Card>
@@ -84,10 +87,10 @@ export default class Profile extends Component{
                         <CardTitle sub className="text-center indigo-text mb-2 font-bold">{this.displayRight()}</CardTitle>
                         <CardText>
                             <strong className="mb-2">Giới thiệu: </strong>
-                            {this.displayDescription}
+                            {this.displayDescription()}
                         </CardText>
                         <div className="row justify-content-end pr-1">
-                            <Button size="sm" color="primary" onClick={this.handleClick}>Đổi câu giới thiệu</Button>
+                            <Button size="sm" color="primary" onClick={this.handleClick}>Đổi ảnh đại diện</Button>
                         </div>
                     </CardBody>
                 </Card>

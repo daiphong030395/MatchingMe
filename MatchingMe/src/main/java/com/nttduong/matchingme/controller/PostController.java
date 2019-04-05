@@ -58,6 +58,16 @@ public class PostController {
 		}
 		return new ResponseEntity<List<Post>>(listPosts, HttpStatus.OK);
 	}
+	//or
+	@RequestMapping(value = "/get-posts/{idUser}", method = RequestMethod.GET)
+	public ResponseEntity<List<Post>> getPostsByIdUser(@PathVariable("idUser") int idUser) {
+//		int idUser = post.getIdUser();
+		List<Post> listPosts = postService.findPostByIdUser(idUser);
+		if (listPosts.isEmpty()) {
+			return new ResponseEntity<List<Post>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<Post>>(listPosts, HttpStatus.OK);
+	}
 	//FEEDBACK:
 	//Add a feedback
 	@RequestMapping(value="/add-feedback", method = RequestMethod.POST)

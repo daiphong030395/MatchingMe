@@ -12,7 +12,7 @@ class AdminCardSection1 extends Component {
 
   componentDidMount(){
     //API get all post
-    fetch("http://localhost:8080//MatchingMe/posts")
+    fetch("http://localhost:8080/MatchingMe/posts")
         .then(response => response.json())
         .then(data => {
           // console.log('ComponentDidMount-state.data: ',data);
