@@ -9,14 +9,15 @@ export default class Profile extends Component{
         this.state = {
             'onEdit' : false,
             user : JSON.parse(localStorage.getItem("user")),
-            'province':''
+            'province':'',
+            data: []
         }
     }
     componentDidMount(){
         // var user = JSON.parse(localStorage.getItem("user"));
         // console.log('id: ',user.id );
         console.log(this.state.user);
-        this.getAPI();
+        // this.getAPI();
     }
 
     handleClick=()=>{
@@ -57,11 +58,11 @@ export default class Profile extends Component{
             'Accept': 'application/json',
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({"matp": 2})
+          body: JSON.stringify({"matp": this.state.user.idProvince})
         })
         .then(Response => Response.json())
         .then(data => {
-          console.log(data.matp);
+          console.log(data);
         //   this.setState({
         //       'province' : data.name
         //   })
@@ -69,7 +70,9 @@ export default class Profile extends Component{
         .catch(function (err) {
           console.log(err);
         }); 
-      }
+    }
+
+
     render(){
         const user = this.state.user;
         return(

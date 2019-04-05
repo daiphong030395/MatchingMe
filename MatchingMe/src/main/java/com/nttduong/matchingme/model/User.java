@@ -12,10 +12,8 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "user", catalog = "matching_me", uniqueConstraints = @UniqueConstraint(columnNames = "username"))
-//@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })//very imp
-//@XmlRootElement(name = "user")
-//@XmlAccessorType(XmlAccessType.FIELD)
+@Table(name = "user", catalog = "matchingme1", uniqueConstraints = @UniqueConstraint(columnNames = "username"))
+
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -45,7 +43,7 @@ public class User implements Serializable {
 
 	@Column
 	private int phone;
-
+	
 	@Column(name = "Id_card")
 	private int idCard;
 
@@ -72,16 +70,41 @@ public class User implements Serializable {
 	@Column(name = "Money_amount")
 	private float MoneyAccount;
 
+	@Column
+	private String status;
 	
-//	private Set<UsersRoles> usersRoleses = new HashSet<UsersRoles>(0);
+	@Column
+	private String description;
 	
+	@Column
+	private String address;
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
 	public String getUsername() {
 		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public String getPassword() {
@@ -102,10 +125,6 @@ public class User implements Serializable {
 
 	public int getId() {
 		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public Date getBirthday() {
@@ -158,10 +177,6 @@ public class User implements Serializable {
 
 	public int getIdRight() {
 		return idRight;
-	}
-
-	public void setIdRight(int idRight) {
-		this.idRight = idRight;
 	}
 
 	public int getIdDegree() {
@@ -232,13 +247,6 @@ public class User implements Serializable {
 		this.idRight = idRight;
 	}
 
-	public User(int idUser, String username, String password, int idRight) {
-		super();
-		this.id = idUser;
-		this.username = username;
-		this.password = password;
-		this.idRight = idRight;
-	}
 
 	public User(String username, String password, String name, Date birthDay, String email, String facebook, int phone,
 			int idCard, String gender, int idRight, int idDegree, float moneyAccount) {

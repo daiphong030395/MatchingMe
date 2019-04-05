@@ -12,22 +12,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
-import com.nttduong.matchingme.model.Post;
+import com.nttduong.matchingme.model.Address;
+import com.nttduong.matchingme.model.District;
 import com.nttduong.matchingme.model.Province;
+import com.nttduong.matchingme.model.Town;
 import com.nttduong.matchingme.model.User;
-import com.nttduong.matchingme.service.PostService;
-//import com.nttduong.matchingme.service.ProvinceService;
 import com.nttduong.matchingme.service.UserService;
 
+
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController // combination of @Controller and @ResponseBody annotations
 public class CRUDRestController {
 
 	@Autowired
 	private UserService userService;
-	
-	@Autowired
-	private PostService postService;
 //	private ProvinceService provinceService;
 
 	// setter
@@ -57,21 +57,38 @@ public class CRUDRestController {
 	}
 		
 	// Add user
-		@RequestMapping(value="/user/new", method = RequestMethod.POST)
-		public ResponseEntity<Void> addUser(@RequestBody User user) { 
-			
-			System.out.println("Username_new: " + user.getUsername());
-			System.out.println("Name_new: " + user.getName());
-			//not run
-			if (userService.isExit(user)) { 		
-//			if(userService.findById(user.getIdUser()).getName() != null) {
-				return new ResponseEntity<Void>(HttpStatus.CONFLICT); // => 409 Indicates that the request could not be processed because of conflict in the current state of the resource
-			}
-			System.out.println(userService.isExit(user));
+	@RequestMapping(value="/user/new", method = RequestMethod.POST)
+	public ResponseEntity<Void> addUser(@RequestBody User user) { 
+		
+		System.out.println("Username_new: " + user.getUsername());
+		System.out.println("Name_new: " + user.getName());
+		//not run
+		if (userService.isExit(user)) { 		
+			return new ResponseEntity<Void>(HttpStatus.CONFLICT); // => 409 Indicates that the request could not be processed because of conflict in the current state of the resource
+		}
+		System.out.println(userService.isExit(user));
+		userService.saveUser(user);
+		return new ResponseEntity<Void>(HttpStatus.CREATED); // => 201 The request has been fulfilled, resulting in the creation of a new resource
+	}
+		//Insert new user from react-app
+		@RequestMapping(value="/insert-user", method = RequestMethod.POST)
+		public ResponseEntity<User> insertUser(@RequestBody User user) { 
+			System.out.println("isExit:"+ userService.isExit(user));
 			userService.saveUser(user);
-			return new ResponseEntity<Void>(HttpStatus.CREATED); // => 201 The request has been fulfilled, resulting in the creation of a new resource
+			return new ResponseEntity<User>(user,HttpStatus.CREATED); // => 201 The request has been fulfilled, resulting in the creation of a new resource
 		}
 		
+	//Check User by username
+		@RequestMapping(value="/check-user-by-username", method = RequestMethod.PUT)
+		public ResponseEntity<User> checkUsername(@RequestBody User user) {
+			String username = user.getUsername();
+			User u = userService.findByUsername(username);
+			if (u.getUsername() == null) {			
+				return new ResponseEntity<User>(u,HttpStatus.NO_CONTENT); 
+			} else {
+				return new ResponseEntity<User>(u,HttpStatus.CONFLICT);
+			}
+		}
 		
 		
 		
@@ -101,22 +118,21 @@ public class CRUDRestController {
 		// Update User
 		@RequestMapping(value="/user/{id}", method = RequestMethod.PUT)
 		public ResponseEntity<User> update(@PathVariable("id") int id, @RequestBody User user){
+//			System.out.println("!!!!! REQUEST BODY: " + user.getId() +", " + user.getUsername() + ", " + user.getName());
 			User u = userService.findById(id);
 			if(u == null) {
 				return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
 			}
 			
+			System.out.println("REQUEST BODY: " + user.getId() +", " + user.getUsername() + ", " + user.getName());
 			// cannot update username since username is a primary key
 			// not run u = user;
-			u.setMoneyAccount(user.getMoneyAccount());
 			u.setBirthday(user.getBirthday());
 			u.setEmail(user.getEmail());
 			u.setFacebook(user.getFacebook());
 			u.setGender(user.getGender());
 			u.setIdCard(user.getIdCard());
-			u.setIdDegree(user.getIdDegree());
-			u.setIdRight(user.getIdRight());
-			u.setId(user.getId());
+			u.setIdDegree(user.getIdDegree()); 
 			u.setIdDistrict(user.getIdDistrict());
 			u.setIdProvince(user.getIdProvince());
 			u.setName(user.getName());
@@ -124,27 +140,29 @@ public class CRUDRestController {
 			u.setPhone(user.getPhone());
 			u.setIdTown(user.getIdTown());
 			
-			System.out.println("USER_update: "+ u.getName());
+			System.out.println("UpdateById(Controller) : "+ u.getUsername());
 			userService.updateUser(u);
 			
 			return new ResponseEntity<User>(u, HttpStatus.OK);
 		}
 		
+		//API for React-app
+//		@RequestMapping(value="/updateUser", method = RequestMethod.PUT)
+//		public ResponseEntity<User> updateUser(@RequestBody User user){
+//			if(user == null) {
+//				return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+//			}			
+//			System.out.println("USER_update: "+ user.getName());
+//			userService.updateUser(user);
+//			
+//			return new ResponseEntity<User>(user, HttpStatus.OK);
+//		}
+		
 		
 		// Check login
 		@RequestMapping(value="/login", method = RequestMethod.POST)
 		public ResponseEntity<User> checklogin(@RequestBody User user){
-//			
-//			System.out.println("USER_update: "+ u.getName());
-//			userService.updateUser(u);
-//			
-//			return new ResponseEntity<User>(u, HttpStatus.OK);
-			
-//			System.out.println("Username: " + user.getUsername());
-//			System.out.println("Password: " + user.getPassword());
 			User u = userService.findByUsername(user.getUsername());
-			System.out.println("pass u: " + u.getPassword());
-			System.out.println("pass user: " + user.getPassword());
 			if(user.getPassword().equals(u.getPassword())) {
 				System.out.println("True");
 				System.out.println(u);
@@ -164,30 +182,27 @@ public class CRUDRestController {
 			System.out.println("Controller_Province_id: " + p.getMatp());
 			return new ResponseEntity<Province>(p, HttpStatus.OK);
 		}
-			//Not working
-//		@RequestMapping(value="/getProvince", method = RequestMethod.POST) 
-//		public ResponseEntity<Province> getProvince(@RequestBody Province prv){
-//			int id = prv.getMatp();
-//			Province p = new Province();
-//			p = provinceService.getProvinceName(id); //--> DISABLE???
-//			System.out.println("Controller_Province_id: " + p.getMatp());
-//			return new ResponseEntity<Province>(p, HttpStatus.OK);
-//		}
-			//GET ok
-//		@RequestMapping(value="/getProvince/{id}", method = RequestMethod.GET) //GET ok
-//		public ResponseEntity<Province> getProvince(@PathVariable("id") int id){
-//			Province p = new Province();
-//			p = userService.findProvinceById(id); //--> OK
-//			System.out.println("Controller_Province_id: " + p.getMatp());
-//			return new ResponseEntity<Province>(p, HttpStatus.OK);
-//		}
-		// Get All users
-		@RequestMapping(value = "/posts", method = RequestMethod.GET)
-		public ResponseEntity<List<Post>> listAllPost() {
-			List<Post> arrPost = postService.getAllPost();
-			if (arrPost.isEmpty()) {
-				return new ResponseEntity<List<Post>>(HttpStatus.NO_CONTENT);
-			}
-			return new ResponseEntity<List<Post>>(arrPost, HttpStatus.OK);
+		
+		//GET PROVINCE NAME
+		@RequestMapping(value="/getAddress", method = RequestMethod.POST) 
+		public ResponseEntity<Address> getAddress(@RequestBody Address ad){
+			//find name of province, district, town
+			int idTown = ad.getIdTown();
+			int idDist = ad.getIdDistrict();
+			int idProv = ad.getIdProvince();
+			Province p = userService.findProvinceById(idProv); //--> OK
+			District d = userService.findDistrictById(idDist);
+			Town t = userService.findTownById(idTown);
+			//set address
+			ad.setNameProvince(p.getName());
+			ad.setNameDistrict(d.getName());
+			ad.setNameTown(t.getName());
+			ad.setAddress();
+
+			System.out.println("Controller_(Address)_id: " + p.getMatp());
+			return new ResponseEntity<Address>(ad, HttpStatus.OK);
 		}
+		
+			
+		
 }

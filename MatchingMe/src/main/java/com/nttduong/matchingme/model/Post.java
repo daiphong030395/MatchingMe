@@ -1,5 +1,7 @@
 package com.nttduong.matchingme.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,35 +10,79 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "post", catalog = "matching_me", uniqueConstraints = @UniqueConstraint(columnNames = "Id_Post"))
-public class Post {
+@Table(name = "post", catalog = "matchingme1", uniqueConstraints = @UniqueConstraint(columnNames = "Id"))
+public class Post implements Serializable {
 	
+	/**
+	 * ID default
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue
-	@Column(name="Id_post")
-	private int idPost;
-	@Column(name="Id_user")
-	private int idUser;
 	@Column
-	private String matp;
-	@Column
-	private String maqh;
-	@Column
-	private String xaid;
-	@Column(name="Id_degree")
-	private int idDegree;
-	@Column(name="Id_class")
-	private int idClass;
-	@Column(name="Id_subject")
-	private int idSubject;
-	@Column
-	private int money;
+	private int id;
 	
-	public int getIdPost() {
-		return idPost;
+	@Column(name="Id_User")
+	private int idUser;
+	
+	@Column(name="Type")
+	private String type;
+	
+	@Column(name="Address_area")
+	private String area;
+	
+	@Column(name="Address_detail")
+	private String address_detail;
+	
+	@Column(name="SessionsPerWeek")
+	private int sessions;
+	
+	@Column(name="Id_Class")
+	private int idClass;
+	
+	@Column(name="PhoneNumber")
+	private int phoneNumber;
+	
+	@Column(name="Id_Subject")
+	private int idSubject;
+	
+	@Column(name="Salary")
+	private int salary;
+	
+	@Column(name="Title")
+	private String title;
+	
+	@Column(name="Status")
+	private boolean status;
+	
+	@Column(name="Description")
+	private String description;
+
+	
+	public String getArea() {
+		return area;
 	}
-	public void setIdPost(int idPost) {
-		this.idPost = idPost;
+	public void setArea(String area) {
+		this.area = area;
+	}
+	public int getSessions() {
+		return sessions;
+	}
+	public void setSessions(int sessions) {
+		this.sessions = sessions;
+	}
+	public boolean isStatus() {
+		return status;
+	}
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public int getIdUser() {
 		return idUser;
@@ -44,30 +90,7 @@ public class Post {
 	public void setIdUser(int idUser) {
 		this.idUser = idUser;
 	}
-	public String getMatp() {
-		return matp;
-	}
-	public void setMatp(String matp) {
-		this.matp = matp;
-	}
-	public String getMaqh() {
-		return maqh;
-	}
-	public void setMaqh(String maqh) {
-		this.maqh = maqh;
-	}
-	public String getXaid() {
-		return xaid;
-	}
-	public void setXaid(String xaid) {
-		this.xaid = xaid;
-	}
-	public int getIdDegree() {
-		return idDegree;
-	}
-	public void setIdDegree(int idDegree) {
-		this.idDegree = idDegree;
-	}
+	
 	public int getIdClass() {
 		return idClass;
 	}
@@ -80,31 +103,92 @@ public class Post {
 	public void setIdSubject(int idSubject) {
 		this.idSubject = idSubject;
 	}
-	public int getMoney() {
-		return money;
+	
+	public String getDescription() {
+		return description;
 	}
-	public void setMoney(int money) {
-		this.money = money;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getAddress_area() {
+		return area;
+	}
+	public void setAddress_area(String address_area) {
+		this.area = address_area;
+	}
+	public String getAddress_detail() {
+		return address_detail;
+	}
+	public void setAddress_detail(String address_detail) {
+		this.address_detail = address_detail;
+	}
+	public int getSessionsPerWeek() {
+		return sessions;
+	}
+	public void setSessionsPerWeek(int sessionsPerWeek) {
+		this.sessions = sessionsPerWeek;
+	}
+	public int getSalary() {
+		return salary;
+	}
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
+	public int getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(int phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	//CONSTRUCTOR
 	public Post() {
 		super();
 	}
-	
-	public Post(int idPost, int idUser, String matp, String maqh, String xaid, int idDegree, int idClass, int idSubject,
-			int money) {
+	public Post(int idUser, String type, String address_area, String address_detail, int sessionsPerWeek, int idClass,
+			int phoneNumber, int idSubject, int salary, String title, String description) {
 		super();
-		this.idPost = idPost;
 		this.idUser = idUser;
-		this.matp = matp;
-		this.maqh = maqh;
-		this.xaid = xaid;
-		this.idDegree = idDegree;
+		this.type = type;
+		this.area = address_area;
+		this.address_detail = address_detail;
+		this.sessions = sessionsPerWeek;
 		this.idClass = idClass;
+		this.phoneNumber = phoneNumber;
 		this.idSubject = idSubject;
-		this.money = money;
+		this.salary = salary;
+		this.title = title;
+		this.description = description;
 	}
-	
+
+	public Post(int idUser, String type, String area, String address_detail, int sessions, int idClass, int phoneNumber,
+			int idSubject, int salary, String title, boolean status, String description) {
+		super();
+		this.idUser = idUser;
+		this.type = type;
+		this.area = area;
+		this.address_detail = address_detail;
+		this.sessions = sessions;
+		this.idClass = idClass;
+		this.phoneNumber = phoneNumber;
+		this.idSubject = idSubject;
+		this.salary = salary;
+		this.title = title;
+		this.status = status;
+		this.description = description;
+	}
 	
 }
