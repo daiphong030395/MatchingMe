@@ -156,7 +156,7 @@ export default class EditProfile extends Component{
         const user = this.state.user;
         var bday = new Date();
         bday = Date(this.state.user.birthday);
-        const temple = "Ví dụ như: Tôi là một gia sư có 3 năm kinh nghiệm. Hiện tôi đang là sinh viên năm cuối trường đại học Quy Nhơn.";
+        const temple = "Chưa có mô tả. Hãy cho mọi người biết bạn là ai? Kinh nghiệm giảng dạy hay những yêu cầu của bạn khi tìm gia sư.";
 
     return(
         <div >

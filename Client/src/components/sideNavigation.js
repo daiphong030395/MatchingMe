@@ -4,12 +4,24 @@ import { ListGroup, ListGroupItem, Fa } from 'mdbreact';
 import { NavLink } from 'react-router-dom';
 
 class TopNavigation extends Component {
+    constructor(){
+        super();
+        this.state = {
+            isLogin: false
+        }
+    }
 
+    componentDidMount(){
+        // user = JSON.parse(localStorage.getItem("user"));
+        if(localStorage.getItem("user") != null){
+            this.setState({isLogin: true })
+        }
+    }
 
     render() {
         return (
             <div className="sidebar-fixed position-fixed">
-                <a href="./" className="logo-wrapper waves-effect">
+                <a href="/" className="logo-wrapper waves-effect">
                     <img alt="Matching Me Logo" className="img-fluid" src={logo}/>
                 </a>
                 <ListGroup className="list-group-flush">
@@ -19,12 +31,14 @@ class TopNavigation extends Component {
                             Trang chủ
                         </ListGroupItem>
                     </NavLink>
-                    <NavLink to="/profile2" activeClassName="activeClass">
+                    {(this.state.isLogin)
+                    ?<NavLink to="/profile2" activeClassName="activeClass">
                         <ListGroupItem>
                             <Fa icon="user" className="mr-3"/>
                             Trang cá nhân
                         </ListGroupItem>
                     </NavLink>
+                    :null}
                     <NavLink to="/createPost" activeClassName="activeClass">
                         <ListGroupItem>
                             <Fa icon="plus" className="mr-3"/>

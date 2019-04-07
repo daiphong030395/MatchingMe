@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardBody, Fa, Col, CardText, CardTitle, Button, CardFooter } from 'mdbreact';
 
-export default class Post extends React.Component{
+export default class PostDetail extends React.Component{
   constructor(props){
     super(props);
     this.state  = {
@@ -12,17 +12,11 @@ export default class Post extends React.Component{
       "subject": null,
       "class": null,
       "icon": null,
-      "button": null,
-      "isLogin": false
+      "button": null
     }
   }
 
   componentDidMount(){
-    //check User
-    if(JSON.parse(localStorage.getItem("user") != null)){
-      this.setState({"isLogin": true})
-    }
-
     this.setState({"id": this.props.post.id});
     if (this.props.post.type === 'FindTutor'){
       this.setState({
@@ -57,7 +51,6 @@ export default class Post extends React.Component{
       break;
       case 7: this.setState({ "subject": "Ngoại ngữ (Anh)" });
       break;
-      default:
     };
     switch(this.props.post.idClass) {
       case 1: this.setState({ "class": "Tiểu học" });
@@ -68,20 +61,17 @@ export default class Post extends React.Component{
       break;
       case 4: this.setState({ "class": "Khác" });
       break;
-      default:
     }
   }
 
   setStatusPost = () => {
-    // const user = JSON.parse(localStorage.getItem("user"));
-    // const id = this.state.id;
-    // console.log("ID user:" ,user.id);
-    // console.log("ID post:" ,id);
-    if (!this.state.isLogin){
+    const user = JSON.parse(localStorage.getItem("user"));
+    const id = this.state.id;
+    console.log("ID user:" ,user.id);
+    console.log("ID post:" ,id);
+    if (user.id === null){
       alert("Đăng nhập hoặc đăng kí để được nhận lớp.")
     } else {
-      const user = JSON.parse(localStorage.getItem("user"));
-      const id = this.state.id;
       if(window.confirm("Người quản trị đang kiểm duyệt. Bạn vui lòng đợi thông báo về thông tin chi tiết của bài đăng này sau vài phút. ")){
           //API send Feedback from user
           fetch(' http://localhost:8080/MatchingMe/add-feedback',{

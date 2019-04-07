@@ -56,6 +56,9 @@ public class Post implements Serializable {
 	@Column(name="Status")
 	private boolean status;
 	
+	@Column(name="userReceive")
+	private int userReceive;
+	
 	@Column(name="Description")
 	private String description;
 
@@ -77,6 +80,12 @@ public class Post implements Serializable {
 	}
 	public void setStatus(boolean status) {
 		this.status = status;
+	}
+	public int getUserReceive() {
+		return userReceive;
+	}
+	public void setUserReceive(int userReceive) {
+		this.userReceive = userReceive;
 	}
 	public int getId() {
 		return id;
@@ -175,7 +184,7 @@ public class Post implements Serializable {
 	}
 
 	public Post(int idUser, String type, String area, String address_detail, int sessions, int idClass, int phoneNumber,
-			int idSubject, int salary, String title, boolean status, String description) {
+			int idSubject, int salary, String title, boolean status,int userReceive, String description) {
 		super();
 		this.idUser = idUser;
 		this.type = type;
@@ -188,6 +197,7 @@ public class Post implements Serializable {
 		this.salary = salary;
 		this.title = title;
 		this.status = status;
+		this.userReceive = userReceive;
 		this.description = description;
 	}
 	

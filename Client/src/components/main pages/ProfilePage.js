@@ -53,26 +53,25 @@ constructor(props){
             return <p>Gia chủ</p>
         }
     }
-}
+  }
   render(){
     const user = this.state.user;
-    const temple = "Tôi là một gia sư có 3 năm kinh nghiệm. Hiện tôi đang là sinh viên năm cuối trường đại học Quy Nhơn.";
-    const post = {
-        "idUser": 6,
-        "type": "FindTutor",
-        "area": "Quy Nhơn, Bình Định",
-        "address_detail": "123 Hùng Vương",
-        "sessions": 2,
-        "idClass": 1,
-        "phoneNumber": 974123458,
-        "idSubject": 6,
-        "salary": 200000,
-        "title": "Tìm gia sư nữ đã tốt nghiệp dạy Toán Văn lớp 3",
-        "status": true,
-        "description": "Yêu cầu nhiệt tình",
-        "address_area": "Quy Nhơn, Bình Định",
-        "sessionsPerWeek": 2
-    }
+    // const post = {
+    //     "idUser": 6,
+    //     "type": "FindTutor",
+    //     "area": "Quy Nhơn, Bình Định",
+    //     "address_detail": "123 Hùng Vương",
+    //     "sessions": 2,
+    //     "idClass": 1,
+    //     "phoneNumber": 974123458,
+    //     "idSubject": 6,
+    //     "salary": 200000,
+    //     "title": "Tìm gia sư nữ đã tốt nghiệp dạy Toán Văn lớp 3",
+    //     "status": true,
+    //     "description": "Yêu cầu nhiệt tình",
+    //     "address_area": "Quy Nhơn, Bình Định",
+    //     "sessionsPerWeek": 2
+    // }
   return (
     <React.Fragment>
         <Row className="justify-content-center">
@@ -100,7 +99,7 @@ constructor(props){
           <Row className="d-flex justify-content-center">
 
           {/* <PostForm post={post}></PostForm> */}
-          <ChildPost post={post}></ChildPost>
+          {/* <ChildPost post={post}></ChildPost> */}
           {
           this.state.posts.map((row,index)=>{
             return <ChildPost key={index} post={row} />
@@ -137,6 +136,7 @@ class ChildPost extends React.Component {
       break;
       case 7: this.setState({ "subject": "Ngoại ngữ (Anh)" });
       break;
+      default: 
     };
     switch(this.props.post.idClass) {
       case 1: this.setState({ "class": "Tiểu học" });
@@ -147,6 +147,7 @@ class ChildPost extends React.Component {
       break;
       case 4: this.setState({ "class": "Khác" });
       break;
+      default:
     }
   }
   render(){
@@ -177,94 +178,4 @@ class ChildPost extends React.Component {
 }
 }
 
-          {/* <Row className="d-flex justify-content-center">
-            <Col lg="6" xl="5" className="mb-3">
-              <Card className="d-flex mb-5">
-                <View>
-                  <img src="https://mdbootstrap.com/img/Mockups/Horizontal/6-col/pro-profile-page.jpg" alt="Project" className="img-fluid"/>
-                  <Mask overlay="white-slight"/>
-                </View>
-                <CardBody>
-                  <CardTitle className="font-bold mb-3">
-                    <strong>Project name</strong>
-                  </CardTitle>
-                  <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                </CardBody>
-                <CardFooter className="links-light profile-card-footer">
-                  <span className="right">
-                    <a className="p-2" href="#profile">
-                      Live Preview
-                      <Fa icon="photo" className="ml-1"/>
-                    </a>
-                  </span>
-                </CardFooter>
-              </Card>
-            </Col>
-            <Col lg="6" xl="5" className="mb-3">
-              <Card className="d-flex mb-5">
-                <view-wrapper>
-                  <img src="https://mdbootstrap.com/img/Mockups/Horizontal/6-col/pro-signup.jpg" alt="Project" className="img-fluid"/>
-                  <Mask overlay="white-slight"/>
-                </view-wrapper>
-                <CardBody>
-                  <CardTitle className="font-bold mb-3">
-                    <strong>Project name</strong>
-                  </CardTitle>
-                  <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                </CardBody>
-                <CardFooter className="links-light profile-card-footer">
-                  <span className="right">
-                    <a className="p-2" href="#profile">
-                      Live Preview
-                      <Fa icon="photo" className="ml-1"/>
-                    </a>
-                  </span>
-                </CardFooter>
-              </Card>
-            </Col>
-          </Row> */}
-
-            {/* <Col lg="6" xl="5" className="mb-3">
-              <Card className="d-flex mb-5">
-                <View>
-                  <img src="https://mdbootstrap.com/img/Mockups/Horizontal/6-col/pro-profile-page.jpg" alt="Project" className="img-fluid"/>
-                  <Mask overlay="white-slight"/>
-                </View>
-                <CardBody>
-                  <CardTitle className="font-bold mb-3">
-                    <strong>Project name</strong>
-                  </CardTitle>
-                  <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                </CardBody>
-                <CardFooter className="links-light profile-card-footer">
-                  <span className="right">
-                    <a className="p-2" href="#profile">
-                      Live Preview
-                      <Fa icon="photo" className="ml-1"/>
-                    </a>
-                  </span>
-                </CardFooter>
-              </Card>
-            </Col>
-            <Col lg="6" xl="5" className="mb-3">
-              <Card className="d-flex mb-5">
-                <View>
-                  <img src="https://mdbootstrap.com/img/Mockups/Horizontal/6-col/pro-signup.jpg" alt="Project" className="img-fluid"/>
-                  <Mask overlay="white-slight"/>
-                </View>
-                <CardBody>
-                  <CardTitle className="font-bold mb-3">
-                    <strong>Project name</strong>
-                  </CardTitle>
-                  <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                </CardBody>
-                <CardFooter className="links-light profile-card-footer">
-                  <span className="right">
-                    <a className="p-2" href="#profile">
-                      Live Preview
-                      <Fa icon="photo" className="ml-1"/>
-                    </a>
-                  </span>
-                </CardFooter>
-              </Card>
-            </Col> */}
+         

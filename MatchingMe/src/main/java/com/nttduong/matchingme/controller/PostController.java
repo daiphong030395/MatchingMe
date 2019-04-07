@@ -61,7 +61,6 @@ public class PostController {
 	//or
 	@RequestMapping(value = "/get-posts/{idUser}", method = RequestMethod.GET)
 	public ResponseEntity<List<Post>> getPostsByIdUser(@PathVariable("idUser") int idUser) {
-//		int idUser = post.getIdUser();
 		List<Post> listPosts = postService.findPostByIdUser(idUser);
 		if (listPosts.isEmpty()) {
 			return new ResponseEntity<List<Post>>(HttpStatus.NO_CONTENT);

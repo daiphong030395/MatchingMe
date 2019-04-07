@@ -10,6 +10,7 @@ class FormLogin extends React.Component{
     this.state = {
       username : "",
       password : "",
+      idRight : 0,
       isLogin: false
     }
   }
@@ -42,7 +43,8 @@ class FormLogin extends React.Component{
       console.log(data);
         localStorage.setItem("user", JSON.stringify(data));
         this.setState({
-          isLogin: true
+          isLogin: true,
+          idRight: data.idRight
         })
         alert("Xin chào "+data.username+". Bạn đã đăng nhập thành công.")
     })
@@ -62,8 +64,10 @@ class FormLogin extends React.Component{
   }
   displayNotification(){
       if(this.state.isLogin){
-        // window.location.reload();
-        alert("Vui lòng nhấn F5 sau khi trở về trang chủ.")
+        if(this.state.idRight === 1){
+          return(<Redirect  to={{ pathname: "./admin" }} />)
+        }
+        alert("Hệ thống đang bị lỗi. Vui lòng nhấn F5 sau khi trở về trang chủ.")
         return(<Redirect  to={{ pathname: "/" }} />)
       } else {  
         return(null);

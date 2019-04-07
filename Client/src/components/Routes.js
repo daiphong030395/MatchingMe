@@ -2,14 +2,15 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import FormLogin from './main pages/Login';
 import Profile from './main pages/Profile';
-import Table from './Pages/details/Table';
+// import Table from './Pages/details/Table';
+import Admin from './main pages/ProfilePage-Admin';
 
 import HomePage from './main pages/HomePage';
 import ProfilePage from './main pages/ProfilePage';
 import Post from './main pages/post-form/CreatePost';
 import TablePost from './main pages/TablePost';
 import Forum from './main pages/Forum';
-import Help from './main pages/Help';
+import Help from './main pages/HelpPage';
 import Register from './main pages/RegisterForm';
 
 class Routes extends React.Component {
@@ -20,9 +21,10 @@ class Routes extends React.Component {
         <Route path='/signup' component={Register} />
         <Route path='/register' component={Register} />
         <Route path='/login' component = {FormLogin} />
-        <Route path='/tableUser' component={Table} />
+        {/* <Route path='/tableUser' component={Table} /> */}
         <Route path='/404' component={Help} />
         <Route path='/profile1' exact component={Profile} />
+        <Route path='/admin' exact component={Admin} />
 
         <Route path='/' exact component={HomePage} />
         <Route path='/profile2' exact component={ProfilePage} />

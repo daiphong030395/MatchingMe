@@ -6,6 +6,7 @@ export default class NewPost extends React.Component {
   constructor(props){
     super(props);
     this.state = {
+        isLogin: false,
         type: 'FindTutor',
         idUser : 0,
         area: '',
@@ -23,9 +24,16 @@ export default class NewPost extends React.Component {
   }
 
   componentDidMount(){
-    this.setState({
-      idUser:  JSON.parse(localStorage.getItem("user")).id
-    })
+    // user = JSON.parse(localStorage.getItem("user"));
+    if(JSON.parse(localStorage.getItem("user")) == null){
+        alert("Hãy đăng nhập trước khi đăng bài.")
+    } else{
+      let user = JSON.parse(localStorage.getItem("user"));
+      this.setState({
+        isLogin: true,
+        idUser:  user.id
+      })
+      }
   }
 
   //ONCHANGE: Handle Input Change
@@ -52,54 +60,58 @@ export default class NewPost extends React.Component {
 //SUBMIT: Handle Submit Form Input
 onHandleSubmit = (event) =>{
   console.log('onHandleSubmit function');
-  if(this.state.type === '' || this.state.arae === '' || this.state.sessions === '' || this.state.title === ''){
-      this.setState({
-          isInputValid: false
-      })
-      alert("Vui lòng điền đầy đủ các mục đăng kí.")
-  } else { 
-      if(!this.state.isInputValid){
-          alert("Đăng kí chưa hợp lệ. Hãy kiểm tra lại thông tin của bạn.")
-      } else{
-          //call API to create new user
-          fetch('http://localhost:8080/MatchingMe/add-post',{
-              mode: "cors",
-              method: "POST",
-              headers:{ 
-                  "Access-Control-Allow-Origin": "*",
-                  'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
-                  "Allow-Credentials": true,
-                  'Accept': 'application/json',
-                  "Content-Type": "application/json"
-              },
-              body: JSON.stringify({  
-                                      "type": this.state.type,
-                                      "idUser" : this.state.idUser,
-                                      "arae": this.state.arae,
-                                      "address_detail": this.state.address_detail,
-                                      "sessions": this.state.sessions,
-                                      "idClass": this.state.idClass,
-                                      "idSubject": this.state.idSubject,
-                                      "phoneNumber": this.state.phoneNumber,
-                                      "salary": this.state.salary,
-                                      "title": this.state.title,
-                                      "description": this.state.description
-              })
-          })
-          // .then(Response => Response.json())
-          // .then(data => {
-          //     console.log("HEHE", data);
-          //     alert("Đăng kí thành công. Vui lòng đăng nhập");
-          // })
-          .catch(function (err) {
-            alert("Lỗi hệ thống");
-            console.log(err);
-          }); 
-          this.setState({
-            isRedirect: true
-          })
-          alert("Chúc mừng. Bạn đã đăng tin thành công.");
-      }
+  if(!this.state.isLogin){
+    alert('Bạn vẫn chưa đăng nhập. Đăng nhập để được post bài viết này.')
+  } else{
+    if(this.state.type === '' || this.state.arae === '' || this.state.sessions === '' || this.state.title === ''){
+        this.setState({
+            isInputValid: false
+        })
+        alert("Vui lòng điền đầy đủ các mục trên bài đăng.")
+    } else { 
+        if(!this.state.isInputValid){
+            alert("Chưa hợp lệ. Hãy kiểm tra lại thông tin của bạn.")
+        } else{
+            //call API to create new user
+            fetch('http://localhost:8080/MatchingMe/add-post',{
+                mode: "cors",
+                method: "POST",
+                headers:{ 
+                    "Access-Control-Allow-Origin": "*",
+                    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+                    "Allow-Credentials": true,
+                    'Accept': 'application/json',
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({  
+                                        "type": this.state.type,
+                                        "idUser" : this.state.idUser,
+                                        "arae": this.state.arae,
+                                        "address_detail": this.state.address_detail,
+                                        "sessions": this.state.sessions,
+                                        "idClass": this.state.idClass,
+                                        "idSubject": this.state.idSubject,
+                                        "phoneNumber": this.state.phoneNumber,
+                                        "salary": this.state.salary,
+                                        "title": this.state.title,
+                                        "description": this.state.description
+                })
+            })
+            // .then(Response => Response.json())
+            // .then(data => {
+            //     console.log("HEHE", data);
+            //     alert("Đăng kí thành công. Vui lòng đăng nhập");
+            // })
+            .catch(function (err) {
+              alert("Lỗi hệ thống");
+              console.log(err);
+            }); 
+            this.setState({
+              isRedirect: true
+            })
+            alert("Chúc mừng. Bạn đã đăng tin thành công.");
+       }
+    }
       event.preventDefault();
   }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {FormInline, Button, Navbar, NavbarBrand, NavbarNav, NavbarToggler, Collapse, NavItem, Fa } from 'mdbreact';
+import { Redirect} from 'react-router-dom';
 
 
 class TopNavigation extends Component {
@@ -8,7 +9,8 @@ class TopNavigation extends Component {
         this.state = {
             collapse: false,
             isLogin: false,
-            isLogout: false
+            isLogout: false,
+            "toHomePage": false
         };
     this.onClick = this.onClick.bind(this);
     this.toggle = this.toggle.bind(this);
@@ -34,13 +36,18 @@ class TopNavigation extends Component {
         });
     }
 
-    onHandleSignOut(){
+    onHandleSignOut=()=>{
         console.log("Handle Sign out");
         if (window.confirm('Bạn có muốn đăng xuất không?')) {
+            this.setState({"toHomePage": true});
             localStorage.removeItem('user');
             window.location.reload();
-            console.log("Logout OK")
+            console.log("Logout OK");
         }
+    }
+    toHomePage=()=>{
+        if(this.state.toHomePage)
+            return(<Redirect  to={{ pathname: "/" }} />)
     }
 
     render() {
@@ -49,6 +56,9 @@ class TopNavigation extends Component {
                 <NavbarBrand href="/">
                     <strong>Matching Me</strong>
                 </NavbarBrand>
+                {(this.state.toHomePage)
+                ?<Redirect  to={{ pathname: "/" }} />
+                : null}
                 <NavbarToggler onClick = { this.onClick } />
                 <Collapse isOpen = { this.state.collapse } navbar>
                     {/* <NavbarNav left>
@@ -109,7 +119,7 @@ class TopNavigation extends Component {
                                     className="border border-light rounded mr-1 nav-link Ripple-parent" 
                                     rel="noopener noreferrer" 
                                     href="./" 
-                                    target="_blank"
+                                    // target="_blank"
                                 ><Fa icon="github" className="mr-2"/> Trang chủ </a>
                             </NavItem>
                             <NavItem>
@@ -125,7 +135,8 @@ class TopNavigation extends Component {
                                     className="border border-light rounded mr-1 nav-link Ripple-parent" 
                                     rel="noopener noreferrer"  
                                     href="./login" 
-                                    target="_blank"> Đăng nhập </a>
+                                    // target="_blank"
+                                > Đăng nhập </a>
                             </NavItem>
                             </NavbarNav>
                         :<NavbarNav right>
