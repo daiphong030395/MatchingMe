@@ -11,6 +11,8 @@ public interface PostDao {
 	
 	public List<Post> findPostByType(String type);
 	
+	public List<Post> findPostBySubject(int idSubject);
+	
 	public List<Post> findPostByIdUser(int idUser);
 	
 	public void savePost(Post post);

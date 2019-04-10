@@ -23,7 +23,7 @@ public class PostController {
 	private PostService postService;
 	
 	//Add a post
-	@RequestMapping(value="/add-post", method = RequestMethod.POST)
+	@RequestMapping(value="/new/post", method = RequestMethod.POST)
 	public ResponseEntity<Void> addPost(@RequestBody Post post) {
 		postService.savePost(post);
 		return new ResponseEntity<Void>(HttpStatus.CREATED); // => 201 The request has been fulfilled, resulting in the creation of a new resource
@@ -40,7 +40,7 @@ public class PostController {
 	}	
 	
 	// Get posts by type
-	@RequestMapping(value = "/get-posts-by-type/{type}", method = RequestMethod.GET)
+	@RequestMapping(value = "/posts-by-type/{type}", method = RequestMethod.GET)
 	public ResponseEntity<List<Post>> getPostsByType(@PathVariable("type") String type) {
 		List<Post> listPosts = postService.findPostByType(type);
 		if (listPosts.isEmpty()) {
@@ -48,8 +48,17 @@ public class PostController {
 		}
 		return new ResponseEntity<List<Post>>(listPosts, HttpStatus.OK);
 	}
+	// Get posts by id subject
+	@RequestMapping(value = "/posts-by-subject/{idSubject}", method = RequestMethod.GET)
+	public ResponseEntity<List<Post>> getPostsBySubject(@PathVariable("idSubject") int idSubject) {
+		List<Post> listPosts = postService.findPostBySubject(idSubject);
+		if (listPosts.isEmpty()) {
+			return new ResponseEntity<List<Post>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<Post>>(listPosts, HttpStatus.OK);
+	}		
 	//Get Posts by id_User
-	@RequestMapping(value = "/get-posts-by-id-user", method = RequestMethod.PUT)
+	@RequestMapping(value = "/posts-by-id-user", method = RequestMethod.PUT)
 	public ResponseEntity<List<Post>> getPostsByIdUser(@RequestBody Post post) {
 		int idUser = post.getIdUser();
 		List<Post> listPosts = postService.findPostByIdUser(idUser);
@@ -59,7 +68,7 @@ public class PostController {
 		return new ResponseEntity<List<Post>>(listPosts, HttpStatus.OK);
 	}
 	//or
-	@RequestMapping(value = "/get-posts/{idUser}", method = RequestMethod.GET)
+	@RequestMapping(value = "/posts/{idUser}", method = RequestMethod.GET)
 	public ResponseEntity<List<Post>> getPostsByIdUser(@PathVariable("idUser") int idUser) {
 		List<Post> listPosts = postService.findPostByIdUser(idUser);
 		if (listPosts.isEmpty()) {
@@ -69,7 +78,7 @@ public class PostController {
 	}
 	//FEEDBACK:
 	//Add a feedback
-	@RequestMapping(value="/add-feedback", method = RequestMethod.POST)
+	@RequestMapping(value="/new/feedback", method = RequestMethod.POST)
 	public ResponseEntity<Void> addPost(@RequestBody Feedback fb) {
 		postService.addFeedback(fb);
 		return new ResponseEntity<Void>(HttpStatus.CREATED); // => 201 The request has been fulfilled, resulting in the creation of a new resource

@@ -115,7 +115,7 @@ onHandleSubmit = (event) =>{
                 'status': true
             })
             //call API to create new user
-            fetch('http://localhost:8080/MatchingMe/insert-user',{
+            fetch('http://localhost:8080/MatchingMe/new/user',{
                 mode: "cors",
                 method: "POST",
                 headers:{ 

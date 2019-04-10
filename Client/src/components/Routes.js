@@ -10,7 +10,7 @@ import ProfilePage from './main pages/ProfilePage';
 import Post from './main pages/post-form/CreatePost';
 import TablePost from './main pages/TablePost';
 import Forum from './main pages/Forum';
-import Help from './main pages/HelpPage';
+import Help from './main pages/FeedbackPage';
 import Register from './main pages/RegisterForm';
 
 class Routes extends React.Component {

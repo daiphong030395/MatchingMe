@@ -71,7 +71,7 @@ public class CRUDRestController {
 		return new ResponseEntity<Void>(HttpStatus.CREATED); // => 201 The request has been fulfilled, resulting in the creation of a new resource
 	}
 		//Insert new user from react-app
-		@RequestMapping(value="/insert-user", method = RequestMethod.POST)
+		@RequestMapping(value="/new/user", method = RequestMethod.POST)
 		public ResponseEntity<User> insertUser(@RequestBody User user) { 
 			System.out.println("isExit:"+ userService.isExit(user));
 			userService.saveUser(user);

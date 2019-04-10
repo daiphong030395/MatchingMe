@@ -5,7 +5,7 @@ import { Card, CardBody} from 'mdbreact';
 class Introduce extends React.Component {
     render() {
         return(
-            <Card className="mb-5 bg-img-foot">
+            <Card className=" bg-img-foot">
             {/* <img src={banner} alt="Banner" /> */}
             <CardBody id="breadcrumb" className="d-flex align-items-center justify-content-between">
                 {/* <Breadcrumb>

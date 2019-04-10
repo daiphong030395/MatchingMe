@@ -37,6 +37,12 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
+	public List<Post> findPostBySubject(int idSubject) {
+		// TODO Auto-generated method stub
+		return postDao.findPostBySubject(idSubject);
+	}
+	
+	@Override
 	public List<Post> findPostByIdUser(int idUser) {
 		// TODO Auto-generated method stub
 		return postDao.findPostByIdUser(idUser);
@@ -64,5 +70,6 @@ public class PostServiceImpl implements PostService {
 		// TODO Auto-generated method stub
 		return postDao.getFeedback();
 	}
+
 
 }

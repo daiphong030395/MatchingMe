@@ -7,18 +7,9 @@ const HomePage =  () => {
   // window.location.reload();
   return (
     <React.Fragment>
-      {/* <BreadcrumSection /> */}
       <Banner />
       <AdminCardSection1 />
-      {/* <ChartSection1 /> */}
-      {/* <TableSection /> */}
       <Footer />
-      {/* <ChartSection2 /> */}
-      {/* <Row className="mb-4"> */}
-          {/* <MapSection /> */}
-          {/* <ModalSection /> */}
-      {/* </Row> */}
-      {/* <AdminCardSection2 /> */}
     </React.Fragment>
   )
 }

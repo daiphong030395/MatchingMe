@@ -14,12 +14,12 @@
 .bg-img{
   background-image: url('./image/banner2.png');
   height: 250px;
-  width: 150%;
+  /* width: 150%; */
 }
 .bg-img-foot{
   background-image: url('./image/footer.png');
   height: 250px;
-  width: 150%;
+  /* width: 150%; */
 }
 .pl-100{
   padding-left: 100px;
@@ -27,6 +27,13 @@
 .h-200{
   width: 100%;
   height: 200px;
+}
+.mb-r{
+  width: 400px;
+  height: 580px
+}
+.mg-sel{
+  margin-left: 20%
 }
 .md-form .form-control {
   margin: 0 0 0.5rem 0;
@@ -47,6 +54,7 @@
   /* background-image: url('./image/nu-sinh-cut.png'); */
   background-color: #d6e7ff;
   color: darkblue;
+  height: 500px
 }
 .bg-post-gc{
   background-image: url('./image/co-giao-cut.png');

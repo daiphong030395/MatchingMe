@@ -64,10 +64,10 @@ class FormLogin extends React.Component{
   }
   displayNotification(){
       if(this.state.isLogin){
+        alert("Vui lòng nhấn F5 sau khi trở về trang chủ.")
         if(this.state.idRight === 1){
           return(<Redirect  to={{ pathname: "./admin" }} />)
         }
-        alert("Hệ thống đang bị lỗi. Vui lòng nhấn F5 sau khi trở về trang chủ.")
         return(<Redirect  to={{ pathname: "/" }} />)
       } else {  
         return(null);

@@ -18,7 +18,7 @@ constructor(props){
 
   componentDidMount(){
     //API get all post
-    fetch("http://localhost:8080/MatchingMe/get-posts/"+this.state.user.id)
+    fetch("http://localhost:8080/MatchingMe/posts/"+this.state.user.id)
         .then(response => response.json())
         .then(data => {
           console.log('ComponentDidMount-state.data: ',data);

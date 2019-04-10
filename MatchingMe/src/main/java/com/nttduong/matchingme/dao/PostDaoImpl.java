@@ -78,6 +78,26 @@ public class PostDaoImpl implements PostDao {
 		return listPosts;
 	}
 
+	//get all posts by id Subject
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Post> findPostBySubject(int idSubject) {
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		List<Post> listPosts = new ArrayList<Post>();
+		try {
+			listPosts = session.createQuery("from com.nttduong.matchingme.model.Post P WHERE P.idSubject =?").setParameter(0,idSubject)
+					.getResultList();
+			System.out.println("DAO(FindBySubject)"+listPosts.size());
+			transaction.commit();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			transaction.rollback();
+		}
+		session.close();
+		return listPosts;
+	}
+	
 	//get all posts by idUser
 	@SuppressWarnings("unchecked")
 	@Override
@@ -187,6 +207,8 @@ public class PostDaoImpl implements PostDao {
 		session.close();
 		return listFBs;
 	}
+
+	
 
 
 }
