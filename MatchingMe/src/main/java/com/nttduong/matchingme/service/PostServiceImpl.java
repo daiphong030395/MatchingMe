@@ -14,11 +14,10 @@ public class PostServiceImpl implements PostService {
 	@Autowired
 	private PostDao postDao;
 	
-	// setter for customerDao
+	// setter for PostDao
 	public void setPostDao(PostDao prDao) {
 		this.postDao = prDao;
 	}
-	
 	
 	public List<Post> getAllPost() {
 		return postDao.getAllPost();

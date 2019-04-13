@@ -4,6 +4,7 @@ import FormLogin from './main pages/Login';
 import Profile from './main pages/Profile';
 // import Table from './Pages/details/Table';
 import Admin from './main pages/ProfilePage-Admin';
+import Notification from './main pages/details/TableMailBox';
 
 import HomePage from './main pages/HomePage';
 import ProfilePage from './main pages/ProfilePage';
@@ -25,6 +26,7 @@ class Routes extends React.Component {
         <Route path='/404' component={Help} />
         <Route path='/profile1' exact component={Profile} />
         <Route path='/admin' exact component={Admin} />
+        <Route path='/notification' component={Notification} />
 
         <Route path='/' exact component={HomePage} />
         <Route path='/profile2' exact component={ProfilePage} />

@@ -27,7 +27,7 @@
 			<list>
 				<value>com.nttduong.matchingme.model.User</value>
 				<value>com.nttduong.matchingme.model.Post</value>
-				<value>com.nttduong.matchingme.model.Right</value>
+				<value>com.nttduong.matchingme.model.MailBox</value>
 				<value>com.nttduong.matchingme.model.Feedback</value>
 			</list>
 		</property>
@@ -70,6 +70,18 @@
 	<bean id="postService" class="com.nttduong.matchingme.service.PostServiceImpl">
 		<property name="postDao">
 			<ref bean = "postDao" />
+		</property>
+	</bean>
+	
+	<!-- Connect database MAILBOX  -->
+	<bean id="mailBoxDao" class="com.nttduong.matchingme.dao.MailBoxImpl">
+		<property name="sessionFactory" >
+			<ref bean = "sessionFactory" />
+		</property>
+	</bean>
+	<bean id="mailService" class="com.nttduong.matchingme.service.MailBoxServiceImpl">
+		<property name="mailBoxDao">
+			<ref bean = "mailBoxDao" />
 		</property>
 	</bean>
 	

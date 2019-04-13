@@ -73,7 +73,7 @@ onHandleSubmit = (event) =>{
             alert("Chưa hợp lệ. Hãy kiểm tra lại thông tin của bạn.")
         } else{
             //call API to create new user
-            fetch('http://localhost:8080/MatchingMe/add-post',{
+            fetch('http://localhost:8080/MatchingMe/new/post',{
                 mode: "cors",
                 method: "POST",
                 headers:{ 

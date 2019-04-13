@@ -30,7 +30,7 @@ public class PostDaoImpl implements PostDao {
 		try {
 			p = (Post) session.createQuery("From com.nttduong.matchingme.model.Post P WHERE P.Id = " + id)
 					.getSingleResult();
-			System.out.println("ProvinceDAO_getPostById: " + p.getIdClass());
+			System.out.println("DAO-getPostById: " + p.getId());
 			transaction.commit();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

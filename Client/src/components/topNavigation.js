@@ -49,6 +49,9 @@ class TopNavigation extends Component {
         if(this.state.toHomePage)
             return(<Redirect  to={{ pathname: "/" }} />)
     }
+    onHandleNotification(){
+
+    }
 
     render() {
         return (
@@ -152,8 +155,10 @@ class TopNavigation extends Component {
                                 <a 
                                     className="border border-light rounded mr-1 nav-link Ripple-parent" 
                                     rel="noopener noreferrer"  
-                                    href="./profile1" 
-                                    target="_blank"><Fa icon="bell" /> Thông báo </a>
+                                    href="./notification" 
+                                ><Fa icon="bell" /> Thông báo </a>
+                                {/* <Button size="sm" type="submit" onClick={this.onHandleNotification}><Fa icon="sign-out" /> Đăng xuất </Button> */}
+
                             </NavItem>
                             <NavItem>
                                 <Button size="sm" type="submit" onClick={this.onHandleSignOut}><Fa icon="sign-out" /> Đăng xuất </Button>

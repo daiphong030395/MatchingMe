@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nttduong.matchingme.model.Feedback;
+import com.nttduong.matchingme.model.MailBox;
 import com.nttduong.matchingme.model.Post;
+import com.nttduong.matchingme.service.MailBoxService;
 import com.nttduong.matchingme.service.PostService;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -21,6 +23,9 @@ import com.nttduong.matchingme.service.PostService;
 public class PostController {
 	@Autowired
 	private PostService postService;
+	
+	@Autowired
+	private MailBoxService mailService;
 	
 	//Add a post
 	@RequestMapping(value="/new/post", method = RequestMethod.POST)
@@ -91,5 +96,14 @@ public class PostController {
 			return new ResponseEntity<List<Feedback>>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<Feedback>>(listFbs, HttpStatus.OK);
+	}
+	//Get MailBox by IdUser
+	@RequestMapping(value="/mailboxes/{idUser}", method = RequestMethod.GET)
+	public ResponseEntity<List<MailBox>> getMail(@PathVariable("idUser") int idUser) {
+		List<MailBox> list = mailService.getMailByUser(idUser);
+		if (list.isEmpty()) {
+			return new ResponseEntity<List<MailBox>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<MailBox>>(list, HttpStatus.OK);
 	}
 }
