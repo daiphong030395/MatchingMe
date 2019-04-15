@@ -97,6 +97,14 @@ public class PostController {
 		}
 		return new ResponseEntity<List<Feedback>>(listFbs, HttpStatus.OK);
 	}
+	//Remove a feedback by id
+	@RequestMapping(value="/feedback/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> deleteFeedbackById(@PathVariable("id") int id){
+		postService.deleteFBById(id);
+		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+	}
+	
+	//MAIL BOX
 	//Get MailBox by IdUser
 	@RequestMapping(value="/mailboxes/{idUser}", method = RequestMethod.GET)
 	public ResponseEntity<List<MailBox>> getMail(@PathVariable("idUser") int idUser) {
@@ -105,5 +113,11 @@ public class PostController {
 			return new ResponseEntity<List<MailBox>>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<MailBox>>(list, HttpStatus.OK);
+	}
+	// Add a Mail to MailBox
+	@RequestMapping(value="/mailbox/new", method = RequestMethod.POST)
+	public ResponseEntity<Void> getMail(@RequestBody MailBox mail) {
+		mailService.addMail(mail);
+		return new ResponseEntity<Void>(HttpStatus.CREATED); 
 	}
 }

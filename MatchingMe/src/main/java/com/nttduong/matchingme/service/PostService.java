@@ -22,4 +22,6 @@ public interface PostService {
 
 	public void addFeedback(Feedback fb);
 	public List<Feedback> getFeedback();
+	public void deleteFBById(int id);
+
 }

@@ -22,4 +22,9 @@ public class MailBoxServiceImpl implements MailBoxService {
 		return mailboxDao.getMailByUser(idUser);
 	}
 
+	@Override
+	public void addMail(MailBox mail) {
+		mailboxDao.addMail(mail);
+	}
+
 }

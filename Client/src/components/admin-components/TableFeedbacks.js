@@ -24,7 +24,7 @@ export default class TableFeedbacks extends Component{
             this.setState({
                 data : feedbacks
             });
-            console.log('ComponentDidMount-state.data: ',this.state.data);
+            console.log('Get All Feedbacks: Ok');
         })
         .catch(error=>{
             alert("Lỗi hệ thống.")
@@ -42,6 +42,26 @@ export default class TableFeedbacks extends Component{
         console.log("onHandleClick");
     }
 
+    onClickRemove(id){
+        if(window.confirm("Bạn đã xử lý phản hồi này hay chưa?")) {
+            //API delete a feedback bby id
+            fetch(' http://localhost:8080/MatchingMe/feedback/' + String(id),{
+            method: "DELETE",
+            headers:{ 
+              "Access-Control-Allow-Origin": "*",
+              'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+              "Content-Type": "application/json"
+            }
+            })
+            .catch(error=>{
+                alert("Lỗi hệ thống: "+ error)
+                console.log('Rollback-Error: ',error)
+            });
+            console.log("Removed a feedback id:", id);
+            window.location.reload();
+        } else
+            console.log("No action")
+    }
     
     render(){
         return(
@@ -76,7 +96,7 @@ export default class TableFeedbacks extends Component{
                                 <td>{value.type}</td>
                                 <td>{value.content}</td>
                                 <td>
-                                    <Button>Remove</Button>
+                                    <Button onClick = {()=>{this.onClickRemove(value.id)}}>Remove</Button>
                                     <Button>Update</Button>
                                 </td>
                             </tr>

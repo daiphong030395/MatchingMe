@@ -21,6 +21,9 @@ constructor(props){
     fetch("http://localhost:8080/MatchingMe/posts/"+this.state.user.id)
         .then(response => response.json())
         .then(data => {
+          if (data === null){
+            alert("Bạn chưa đăng bài post nào lên hệ thống.");
+          } else {
           console.log('ComponentDidMount-state.data: ',data);
           let posts = [];
           data.map(post => {
@@ -30,6 +33,7 @@ constructor(props){
           this.setState({
               "posts" : posts
           });
+        }
           // console.log('ComponentDidMount-state.data: ',this.state.posts);
         })
         .catch(error=>{

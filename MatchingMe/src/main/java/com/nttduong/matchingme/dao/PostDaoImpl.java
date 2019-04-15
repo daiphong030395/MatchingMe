@@ -108,7 +108,7 @@ public class PostDaoImpl implements PostDao {
 		try {
 			listPosts = session.createQuery("From com.nttduong.matchingme.model.Post P WHERE P.idUser=?").setParameter(0, idUser)
 					.getResultList();
-			System.out.println("DAO(FindByIdUser)"+listPosts.size());
+			System.out.println("DAO(FindByIdUser): "+listPosts.size());
 			transaction.commit();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -206,6 +206,26 @@ public class PostDaoImpl implements PostDao {
 		}
 		session.close();
 		return listFBs;
+	}
+	
+	//FEEDBACK: remove a feedback by id
+	@Override
+	public void deleteFBById(int id) {
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Feedback fb = new Feedback();
+		try {
+			fb = (Feedback) session.createQuery("From com.nttduong.matchingme.model.Feedback FB WHERE FB.id = " + id)
+					.getSingleResult();
+			session.delete(fb);
+			System.out.println("DAO-DeleteFeedBackById-OK: " +fb.getId());
+			transaction.commit();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			transaction.rollback();
+		}
+		session.close();
+		
 	}
 
 	

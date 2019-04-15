@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
 import {Button, CardHeader,MDBInput } from 'mdbreact';
 import { Card, CardBody, Table, TableBody, TableHead, Row, Col } from 'mdbreact';
+import SendPost from './SendPostToUser';
 
 export default class TablePosts extends Component{
     constructor(){
         super();
         this.state = {
           data : [],
+          sendPost: false,
+          value: null
         }
       }
 
@@ -28,6 +31,9 @@ export default class TablePosts extends Component{
             alert("Lỗi hệ thống.")
             console.log('Rollback-Error: ',error)
         })        
+        if (this.state.sendPost){
+
+        }
     }
     
     onHandleChange(event){
@@ -61,9 +67,20 @@ export default class TablePosts extends Component{
           };
     }
 
+    onSendPostToReceiver(value){
+        console.log(value);
+        this.setState({sendPost: !this.state.sendPost, value: value})
+    }
+    displaySendPost(){
+        if(this.state.value !== null  && this.state.sendPost)
+            return(<SendPost post = {this.state.value} />)
+    }
     render(){
         return(
         <Row className="mb-4">
+            <Col md= "12">
+                {this.displaySendPost()}
+            </Col>
           <Col md="12">
               <Card >
                 <CardHeader>
@@ -76,6 +93,7 @@ export default class TablePosts extends Component{
                     <Button onClick={this.onHandleClick} > Search </Button>
                 </CardHeader>
                 <CardBody>
+                    
                     <Table hover>
                       <TableHead color="blue-grey lighten-4">
                         <tr>
@@ -108,8 +126,9 @@ export default class TablePosts extends Component{
                                 <td>{value.userReceive}</td>
                                 <td>{String(value.status)}</td>
                                 <td>
-                                    <Button>Update Status</Button>
-                                    <Button>Update User Receive</Button>
+                                    <Button>Change Status</Button>
+                                    <Button onClick={()=>{this.onSendPostToReceiver(value)}}>Send Post to Receiver</Button>
+                                
                                 </td>
                             </tr>
                         )}

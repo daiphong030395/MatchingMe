@@ -29,6 +29,7 @@ class Routes extends React.Component {
         <Route path='/notification' component={Notification} />
 
         <Route path='/' exact component={HomePage} />
+        <Route path='/home' component={HomePage} />
         <Route path='/profile2' exact component={ProfilePage} />
         <Route path='/createPost' exact component={Post} />
         <Route path='/tablePost' component={TablePost} />

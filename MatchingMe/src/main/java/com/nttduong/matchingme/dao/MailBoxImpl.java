@@ -39,5 +39,20 @@ public class MailBoxImpl implements MailBoxDao {
 		return listMail;
 	}
 
+	@Override
+	public void addMail(MailBox mail) {
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		try {
+			session.save(mail);
+			transaction.commit();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			transaction.rollback();
+		}
+		session.close();
+		
+	}
+
 
 }

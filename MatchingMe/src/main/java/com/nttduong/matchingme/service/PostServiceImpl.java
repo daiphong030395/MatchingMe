@@ -70,5 +70,10 @@ public class PostServiceImpl implements PostService {
 		return postDao.getFeedback();
 	}
 
+	@Override
+	public void deleteFBById(int id) {
+		postDao.deleteFBById(id);		
+	}
+
 
 }

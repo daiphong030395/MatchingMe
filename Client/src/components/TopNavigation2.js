@@ -39,8 +39,9 @@ class TopNavigation extends Component {
     onHandleSignOut=()=>{
         console.log("Handle Sign out");
         if (window.confirm('Bạn có muốn đăng xuất không?')) {
-            this.setState({"toHomePage": true});
+            this.setState({"toHomePage": true, isLogin: false});
             localStorage.removeItem('user');
+            // return(<Redirect  to={{ pathname: "/" }} />)
             window.location.reload();
             console.log("Logout OK");
         }
@@ -48,6 +49,11 @@ class TopNavigation extends Component {
     toHomePage=()=>{
         if(this.state.toHomePage)
             return(<Redirect  to={{ pathname: "/" }} />)
+        if(!this.state.isLogin){
+            localStorage.removeItem('user');
+            return(<Redirect  to={{ pathname: "/" }} />);
+        }
+            
     }
     onHandleNotification(){
 
@@ -59,19 +65,16 @@ class TopNavigation extends Component {
                 <NavbarBrand href="/">
                     <strong>Matching Me</strong>
                 </NavbarBrand>
-                {(this.state.toHomePage)
-                ?<Redirect  to={{ pathname: "/" }} />
-                : null}
+                
                 <NavbarToggler onClick = { this.onClick } />
                 <Collapse isOpen = { this.state.collapse } navbar>
-                    
                     <nav>
                         <FormInline className="md-form m-0" >
                             <input className="form-control form-control-sm" type="search" placeholder="Tìm kiếm" aria-label="Search"/>
                             <Button size="sm" color="primary" className="my-0" type="submit"><Fa icon="search" /></Button>
                         </FormInline>
                     </nav>
-                    { !this.state.isLogin
+                    {/* { !this.state.isLogin
                         ?<NavbarNav right>
                             <NavItem>
                                 <a 
@@ -97,8 +100,8 @@ class TopNavigation extends Component {
                                     // target="_blank"
                                 > Đăng nhập </a>
                             </NavItem>
-                            </NavbarNav>
-                        :<NavbarNav right>
+                            </NavbarNav> */}
+                        <NavbarNav right>
                             <NavItem>
                                 <a 
                                     className="border border-light rounded mr-1 nav-link Ripple-parent" 
@@ -119,7 +122,7 @@ class TopNavigation extends Component {
                                 <Button size="sm" type="submit" onClick={this.onHandleSignOut}><Fa icon="sign-out" /> Đăng xuất </Button>
                             </NavItem>
                         </NavbarNav>
-                    }
+                    
                     
                 </Collapse>
             </Navbar>

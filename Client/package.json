@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "4": "0.0.0",
     "axios": "^0.18.0",
-    "bootstrap": "^4.0.0-alpha.6",
+    "bootstrap": "^4.3.1",
     "font-awesome": "^4.7.0",
-    "mdbreact": "^4.10.0",
+    "mdbreact": "^4.12.0",
     "moment": "^2.24.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",

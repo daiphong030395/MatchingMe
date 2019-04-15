@@ -37,7 +37,7 @@ export default class Post extends React.Component{
     };
     if (!this.props.post.status){
       this.setState({
-        "button": <Button onClick={this.setStatusPost}> Nhận lớp </Button>
+        "button": <Button onClick={this.setStatusPost}> Đăng kí nhận lớp </Button>
       })
     }else{
       this.setState({
@@ -82,9 +82,9 @@ export default class Post extends React.Component{
     } else {
       const user = JSON.parse(localStorage.getItem("user"));
       const id = this.state.id;
-      if(window.confirm("Người quản trị đang kiểm duyệt. Bạn vui lòng đợi thông báo về thông tin chi tiết của bài đăng này sau vài phút. ")){
+      if(window.confirm("Hãy đọc kĩ trước khi gửi yêu cầu. Người quản trị đang kiểm duyệt. Bạn vui lòng kiểm tra thông báo sau vài phút. ")){
           //API send Feedback from user
-          fetch(' http://localhost:8080/MatchingMe/add-feedback',{
+          fetch(' http://localhost:8080/MatchingMe//new/feedback',{
             // mode: "cors",
             method: "POST",
             headers:{ 
@@ -96,6 +96,7 @@ export default class Post extends React.Component{
             },
             body: JSON.stringify({"type": "Request Recieve", "content": "User id: "+ String(user.id) + " request recieve post id: " + String(id)})
           })
+          this.setState({"status": false});
       }
     }
   }

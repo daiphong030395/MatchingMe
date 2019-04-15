@@ -56,9 +56,18 @@
   color: darkblue;
   height: 500px
 }
-.bg-post-gc{
-  background-image: url('./image/co-giao-cut.png');
-  background-color:red;
+.bg-send-post{
+  /* background-image: url('./image/co-giao-cut.png'); */
+  background-color:rgb(255, 225, 225);
+  height: 600px;
+  margin-left: 50px;
+}
+.w-150{
+  width: 150px;
+}
+.w-p-input{
+  width: 500px;
+  margin-left: 20px;
 }
 @keyframes App-logo-spin {
   from {
@@ -125,9 +134,12 @@ main {
   background: #fff;
 }
 
-#content{
+/* #content{
   margin-left:  270px;
-}    
+}     */
+.content-mail{
+  height: 10rem;
+}
 
 
 .sidebar-fixed .logo-wrapper img{

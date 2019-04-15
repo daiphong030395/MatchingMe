@@ -46,7 +46,7 @@ class MailForm extends React.Component{
                 <label htmlFor="content" className="grey-text font-weight-light">
                   Nội dung
                 </label>
-                <input type="text" name="content" id="content" className="form-control" onChange = {this.handleChange.bind(this)}/>
+                <input type="text" name="content" className="form-control content-mail" onChange = {this.handleChange.bind(this)}/>
                 <div className="text-center mt-4">
                     <MDBBtn color="deep-orange" className="mb-3" type="submit">
                       Gửi
