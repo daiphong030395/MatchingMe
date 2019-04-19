@@ -90,7 +90,7 @@ export default class Profile extends Component{
                             {this.displayDescription()}
                         </CardText>
                         <div className="row justify-content-end pr-1">
-                            <Button size="sm" color="primary" onClick={this.handleClick}>Đổi ảnh đại diện</Button>
+                            <Button size="sm" color="primary" onClick={this.handleClick}>Thay đổi</Button>
                         </div>
                     </CardBody>
                 </Card>

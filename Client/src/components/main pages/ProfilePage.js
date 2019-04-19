@@ -37,7 +37,7 @@ constructor(props){
           // console.log('ComponentDidMount-state.data: ',this.state.posts);
         })
         .catch(error=>{
-          alert("Lỗi hệ thống");
+          alert("Bạn chưa từng đăng bài nào lên hệ thống.");
           console.log('Rollback-Error: ',error)
         })
   }
@@ -91,7 +91,7 @@ constructor(props){
                       </CardText>
                     <div className="row justify-content-end pr-1">
                     <a href="/profile1">
-                      <Button size="sm" onClick={this.onHandleClick} outline color="primary">Xem thêm </Button>
+                      <Button size="sm" onClick={this.onHandleClick} outline color="primary">Chỉnh sửa thông tin cá nhân </Button>
                     </a>
                     </div>
                 </CardBody>

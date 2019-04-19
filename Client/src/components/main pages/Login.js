@@ -68,7 +68,7 @@ class FormLogin extends React.Component{
         if(this.state.idRight === 1){
           return(<Redirect  to={{ pathname: "./admin" }} />)
         }
-        return(<Redirect  to={{ pathname: "/" }} />)
+        return(<Redirect  to={{ pathname: "/profile2" }} />)
       } else {  
         return(null);
     }

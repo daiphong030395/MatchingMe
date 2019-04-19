@@ -127,8 +127,8 @@ export default class TablePosts extends Component{
                                 <td>{String(value.status)}</td>
                                 <td>
                                     <Button>Change Status</Button>
-                                    <Button onClick={()=>{this.onSendPostToReceiver(value)}}>Send Post to Receiver</Button>
-                                
+                                    <Button onClick={()=>{this.onSendPostToReceiver(value)}}>Send Post</Button>
+                                    <Button>Remove</Button>
                                 </td>
                             </tr>
                         )}
